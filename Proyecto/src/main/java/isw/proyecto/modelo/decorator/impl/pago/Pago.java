@@ -1,4 +1,4 @@
-package isw.proyecto.modelo.builder.decorator.impl.pago;
+package isw.proyecto.modelo.decorator.impl.pago;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

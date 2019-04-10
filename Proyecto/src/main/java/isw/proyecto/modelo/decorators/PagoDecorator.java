@@ -1,6 +1,6 @@
 package isw.proyecto.modelo.decorators;
 
-import isw.proyecto.modelo.builder.decorator.impl.pago.IPago;
+import isw.proyecto.modelo.decorator.impl.pago.IPago;
 
 public abstract class PagoDecorator implements IPago{
 

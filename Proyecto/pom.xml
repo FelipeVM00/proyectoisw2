@@ -17,6 +17,11 @@
   </properties>
 
   <dependencies>
+   <dependency> 
+    <groupId>mysql</groupId>
+   	 	<artifactId>mysql-connector-java</artifactId>
+   		 <version>8.0.15</version>
+	</dependency>
   <dependency>
 	<groupId>org.hamcrest</groupId>
 		<artifactId>hamcrest-core</artifactId>
