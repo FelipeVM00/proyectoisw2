@@ -17,7 +17,7 @@ public class ZonaResidencial {
 		
 	}
 	
-	private static synchronized void crearInstancia() {
+	private static void crearInstancia() {
 		if(singleton == null) {
 			singleton = new ZonaResidencial();
 		}

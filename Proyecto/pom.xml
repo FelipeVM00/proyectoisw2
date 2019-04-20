@@ -19,6 +19,12 @@
   <dependencies>
 
 	<dependency>
+  		<groupId>com.calendarfx</groupId>
+  		<artifactId>view</artifactId>
+  		<version>8.5.0</version>
+	</dependency>
+
+	<dependency>
    		 <groupId>com.jfoenix</groupId>
    		 <artifactId>jfoenix</artifactId>
    		 <version>8.0.8</version>
