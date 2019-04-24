@@ -4,37 +4,53 @@ import java.util.List;
 
 import isw.proyecto.modelo.Apartamento;
 import isw.proyecto.modelo.dao.ApartamentoDAO;
+import isw.proyecto.modelo.dao.impl.ApartamentoDAOImpl;
 
 public class ApartamentoDAOProxy implements ApartamentoDAO {
 
+private static ApartamentoDAO object;
+	
 	@Override
 	public void crear(Apartamento c) {
-		// TODO Auto-generated method stub
-
+		if(object == null) {
+			object = new ApartamentoDAOImpl();
+		}
+		object.crear(c);
+		
 	}
 
 	@Override
 	public Apartamento leer(Apartamento key) {
-		// TODO Auto-generated method stub
-		return null;
+		if(object == null) {
+			object = new ApartamentoDAOImpl();
+		}
+		return object.leer(key);
 	}
 
 	@Override
 	public void actualizar(Apartamento c) {
-		// TODO Auto-generated method stub
-
+		if(object == null) {
+			object = new ApartamentoDAOImpl();
+		}
+		object.actualizar(c);
+		
 	}
 
 	@Override
 	public void eliminar(Apartamento key) {
-		// TODO Auto-generated method stub
-
+		if(object == null) {
+			object = new ApartamentoDAOImpl();
+		}
+		object.eliminar(key);
+		
 	}
 
 	@Override
 	public List<Apartamento> leerTodo() {
-		// TODO Auto-generated method stub
-		return null;
+		if(object == null) {
+			object = new ApartamentoDAOImpl();
+		}
+		return object.leerTodo();
 	}
 
 }

@@ -4,37 +4,52 @@ import java.util.List;
 
 import isw.proyecto.modelo.Bloque;
 import isw.proyecto.modelo.dao.BloqueDAO;
+import isw.proyecto.modelo.dao.impl.BloqueDAOImpl;
 
 public class BloqueDAOProxy implements BloqueDAO {
 
+private static BloqueDAO object;
+	
 	@Override
 	public void crear(Bloque c) {
-		// TODO Auto-generated method stub
-
+		if(object == null) {
+			object = new BloqueDAOImpl();
+		}
+		object.crear(c);
 	}
 
 	@Override
 	public Bloque leer(Bloque key) {
-		// TODO Auto-generated method stub
-		return null;
+		if(object == null) {
+			object = new BloqueDAOImpl();
+		}
+		return object.leer(key);
 	}
 
 	@Override
 	public void actualizar(Bloque c) {
-		// TODO Auto-generated method stub
+		if(object == null) {
+			object = new BloqueDAOImpl();
+		}
+		object.actualizar(c);
 
 	}
 
 	@Override
 	public void eliminar(Bloque key) {
-		// TODO Auto-generated method stub
+		if(object == null) {
+			object = new BloqueDAOImpl();
+		}
+		object.eliminar(key);
 
 	}
 
 	@Override
 	public List<Bloque> leerTodo() {
-		// TODO Auto-generated method stub
-		return null;
+		if(object == null) {
+			object = new BloqueDAOImpl();
+		}
+		return object.leerTodo();
 	}
 
 }

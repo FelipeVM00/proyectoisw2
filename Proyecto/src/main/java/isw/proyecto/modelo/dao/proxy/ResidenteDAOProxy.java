@@ -4,37 +4,56 @@ import java.util.List;
 
 import isw.proyecto.modelo.Residente;
 import isw.proyecto.modelo.dao.ResidenteDAO;
+import isw.proyecto.modelo.dao.impl.ResidenteDAOImpl;
 
 public class ResidenteDAOProxy implements ResidenteDAO {
 
+private static ResidenteDAO object;
+	
 	@Override
 	public void crear(Residente c) {
-		// TODO Auto-generated method stub
+		if(object == null) {
+			object = new ResidenteDAOImpl();
+		}
+		
+		object.crear(c);
 
 	}
 
 	@Override
 	public Residente leer(Residente key) {
-		// TODO Auto-generated method stub
-		return null;
+		if(object == null) {
+			object = new ResidenteDAOImpl();
+		}
+		return object.leer(key);
 	}
 
 	@Override
 	public void actualizar(Residente c) {
-		// TODO Auto-generated method stub
+		if(object == null) {
+			object = new ResidenteDAOImpl();
+		}
+		
+		object.actualizar(c);
 
 	}
 
 	@Override
 	public void eliminar(Residente key) {
-		// TODO Auto-generated method stub
+		if(object == null) {
+			object = new ResidenteDAOImpl();
+		}
+		
+		object.eliminar(key);
 
 	}
 
 	@Override
 	public List<Residente> leerTodo() {
-		// TODO Auto-generated method stub
-		return null;
+		if(object == null) {
+			object = new ResidenteDAOImpl();
+		}
+		return object.leerTodo();
 	}
 
 }

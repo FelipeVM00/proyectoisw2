@@ -4,37 +4,56 @@ import java.util.List;
 
 import isw.proyecto.modelo.Vivienda;
 import isw.proyecto.modelo.dao.ViviendaDAO;
+import isw.proyecto.modelo.dao.impl.ViviendaDAOImpl;
 
 public class ViviendaDAOProxy implements ViviendaDAO {
 
+private static ViviendaDAO object;
+	
 	@Override
 	public void crear(Vivienda c) {
-		// TODO Auto-generated method stub
+		if(object == null) {
+			object = new ViviendaDAOImpl();
+		}
+		
+		object.crear(c);
 
 	}
 
 	@Override
 	public Vivienda leer(Vivienda key) {
-		// TODO Auto-generated method stub
-		return null;
+		if(object == null) {
+			object = new ViviendaDAOImpl();
+		}
+		return object.leer(key);
 	}
 
 	@Override
 	public void actualizar(Vivienda c) {
-		// TODO Auto-generated method stub
+		if(object == null) {
+			object = new ViviendaDAOImpl();
+		}
+		
+		object.actualizar(c);
 
 	}
 
 	@Override
 	public void eliminar(Vivienda key) {
-		// TODO Auto-generated method stub
+		if(object == null) {
+			object = new ViviendaDAOImpl();
+		}
+		
+		object.eliminar(key);
 
 	}
 
 	@Override
 	public List<Vivienda> leerTodo() {
-		// TODO Auto-generated method stub
-		return null;
+		if(object == null) {
+			object = new ViviendaDAOImpl();
+		}
+		return object.leerTodo();
 	}
 
 }

@@ -4,37 +4,57 @@ import java.util.List;
 
 import isw.proyecto.modelo.Empleado;
 import isw.proyecto.modelo.dao.EmpleadoDAO;
+import isw.proyecto.modelo.dao.impl.EmpleadoDAOImpl;
 
 public class EmpleadoDAOProxy implements EmpleadoDAO {
 
+private static EmpleadoDAO object;
+	
 	@Override
 	public void crear(Empleado c) {
-		// TODO Auto-generated method stub
+		if(object == null) {
+			object = new EmpleadoDAOImpl();
+		}
+		
+		object.crear(c);
 
 	}
 
 	@Override
 	public Empleado leer(Empleado key) {
-		// TODO Auto-generated method stub
-		return null;
+		if(object == null) {
+			object = new EmpleadoDAOImpl();
+		}
+		
+		return object.leer(key);
 	}
 
 	@Override
 	public void actualizar(Empleado c) {
-		// TODO Auto-generated method stub
+		if(object == null) {
+			object = new EmpleadoDAOImpl();
+		}
+		
+		object.actualizar(c);
 
 	}
 
 	@Override
 	public void eliminar(Empleado key) {
-		// TODO Auto-generated method stub
+		if(object == null) {
+			object = new EmpleadoDAOImpl();
+		}
+		
+		object.eliminar(key);
 
 	}
 
 	@Override
 	public List<Empleado> leerTodo() {
-		// TODO Auto-generated method stub
-		return null;
+		if(object == null) {
+			object = new EmpleadoDAOImpl();
+		}
+		return object.leerTodo();
 	}
 
 }

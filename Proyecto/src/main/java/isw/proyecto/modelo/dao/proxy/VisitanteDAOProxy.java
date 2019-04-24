@@ -4,37 +4,56 @@ import java.util.List;
 
 import isw.proyecto.modelo.Visitante;
 import isw.proyecto.modelo.dao.VisitanteDAO;
+import isw.proyecto.modelo.dao.impl.VisitanteDAOImpl;
 
 public class VisitanteDAOProxy implements VisitanteDAO {
 
+private static VisitanteDAO object;
+	
 	@Override
 	public void crear(Visitante c) {
-		// TODO Auto-generated method stub
+		if(object == null) {
+			object = new VisitanteDAOImpl();
+		}
+		
+		object.crear(c);
 
 	}
 
 	@Override
 	public Visitante leer(Visitante key) {
-		// TODO Auto-generated method stub
-		return null;
+		if(object == null) {
+			object = new VisitanteDAOImpl();
+		}
+		return object.leer(key);
 	}
 
 	@Override
 	public void actualizar(Visitante c) {
-		// TODO Auto-generated method stub
+		if(object == null) {
+			object = new VisitanteDAOImpl();
+		}
+		
+		object.actualizar(c);
 
 	}
 
 	@Override
 	public void eliminar(Visitante key) {
-		// TODO Auto-generated method stub
+		if(object == null) {
+			object = new VisitanteDAOImpl();
+		}
+		
+		object.eliminar(key);
 
 	}
 
 	@Override
 	public List<Visitante> leerTodo() {
-		// TODO Auto-generated method stub
-		return null;
+		if(object == null) {
+			object = new VisitanteDAOImpl();
+		}
+		return object.leerTodo();
 	}
 
 }
