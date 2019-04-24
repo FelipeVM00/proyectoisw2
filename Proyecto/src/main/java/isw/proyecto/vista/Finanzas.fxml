@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXScrollPane?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane id="AnchorPane" prefHeight="713.0" prefWidth="1219.0" stylesheets="@custom.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="isw.proyecto.controlador.FinanzasControlador">
+   <children>
+      <JFXTabPane fx:id="pestañasPane" layoutX="20.0" layoutY="66.0" prefHeight="713.0" prefWidth="1219.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <tabs>
+            <Tab text="General">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Pane layoutX="168.0" layoutY="14.0" prefHeight="89.0" prefWidth="883.0" style="-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-color: white;">
+                           <children>
+                              <Label layoutX="35.0" layoutY="-1.0" prefHeight="91.0" prefWidth="522.0" style="-fx-font-size: 30; -fx-font-weight: bold; -fx-text-fill: #7387A8;" text="FONDOS DE LA ZONA RESIDENCIAL: " />
+                              <Label fx:id="fondosLabel" layoutX="557.0" layoutY="-1.0" prefHeight="91.0" prefWidth="316.0" style="-fx-font-size: 30; -fx-font-weight: bold; -fx-text-fill: #008000;" text="\$" />
+                           </children>
+                        </Pane>
+                        <Pane layoutX="152.0" layoutY="193.0" prefHeight="405.0" prefWidth="915.0" style="-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-color: white;">
+                           <children>
+                              <JFXScrollPane prefHeight="405.0" prefWidth="916.0">
+                                 <children>
+                                    <JFXTreeTableView fx:id="transaccionesTabla" prefHeight="400.0" prefWidth="830.0">
+                                       <columns>
+                                          <TreeTableColumn fx:id="tablaFecha" editable="false" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Fecha" />
+                                          <TreeTableColumn editable="false" maxWidth="700.0" prefWidth="700.0" text="Descripción" />
+                                          <TreeTableColumn editable="false" maxWidth="116.0" prefWidth="116.0" resizable="false" text="Monto" />
+                                       </columns>
+                                    </JFXTreeTableView>
+                                 </children>
+                              </JFXScrollPane>
+                           </children>
+                        </Pane>
+                        <Label layoutX="152.0" layoutY="154.0" prefHeight="38.0" prefWidth="522.0" style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #7387A8;" text="Historial de transacciones" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Pagos administración">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="696.0" style="-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-color: white;" />
+               </content>
+            </Tab>
+            <Tab text="Facturación">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+            </Tab>
+         </tabs>
+      </JFXTabPane>
+   </children>
+</AnchorPane>

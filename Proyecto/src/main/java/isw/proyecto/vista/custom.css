@@ -10,4 +10,6 @@
     -fx-background-color:#2A3F54;
 }
 
-
+.jfx-tab-pane .tab-header-background {
+    -fx-background-color: #4d4e4f;
+}

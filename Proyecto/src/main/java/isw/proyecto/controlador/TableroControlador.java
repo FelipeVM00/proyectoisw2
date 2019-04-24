@@ -29,7 +29,7 @@ public class TableroControlador implements Initializable {
     private JFXButton btnAgenda;
     
     @FXML
-    private JFXButton btnPagos;
+    private JFXButton btnFinanzas;
     
     @FXML
     private JFXButton btnParqueadero;
@@ -49,7 +49,7 @@ public class TableroControlador implements Initializable {
     @FXML
     private JFXButton btnConfig;
        
-    AnchorPane home, agenda, pagos, parqueadero, residentes, empresas, reportes, quejas, config;
+    AnchorPane home, agenda, finanzas, parqueadero, residentes, empresas, reportes, quejas, config;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -57,7 +57,7 @@ public class TableroControlador implements Initializable {
         try {
              home = FXMLLoader.load(getClass().getResource("/isw/proyecto/vista/Home.fxml"));
              agenda = FXMLLoader.load(getClass().getResource("/isw/proyecto/vista/Agenda.fxml"));
-             pagos = FXMLLoader.load(getClass().getResource("/isw/proyecto/vista/Pagos.fxml"));
+             finanzas = FXMLLoader.load(getClass().getResource("/isw/proyecto/vista/Finanzas.fxml"));
              parqueadero = FXMLLoader.load(getClass().getResource("/isw/proyecto/vista/Parqueadero.fxml"));
              residentes = FXMLLoader.load(getClass().getResource("/isw/proyecto/vista/Residentes.fxml"));
              empresas = FXMLLoader.load(getClass().getResource("/isw/proyecto/vista/Empresas.fxml"));
@@ -105,8 +105,8 @@ public class TableroControlador implements Initializable {
     }
     
     @FXML
-    private void switchPagos(ActionEvent event) {
-        setNode(pagos);
+    private void switchFinanzas(ActionEvent event) {
+        setNode(finanzas);
     }
     
     @FXML

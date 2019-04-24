@@ -32,12 +32,11 @@ public class AgendaControlador implements Initializable{
         Calendar asambleas = new Calendar("Asambleas"); 
         Calendar reuniones = new Calendar("Reuniones");      
         asambleas.setStyle(Style.STYLE2); 
-        reuniones.setStyle(Style.STYLE3);
-        
+        reuniones.setStyle(Style.STYLE3);     
         CalendarSource myCalendarSource = new CalendarSource("Tipos de reuniones"); 
         myCalendarSource.getCalendars().addAll(asambleas, reuniones);
         
-        
+
         calendarView.getCalendarSources().addAll(myCalendarSource); 
         calendarView.setRequestedTime(LocalTime.now());
 
@@ -62,6 +61,7 @@ public class AgendaControlador implements Initializable{
         updateTimeThread.setPriority(Thread.MIN_PRIORITY);
         updateTimeThread.setDaemon(true);
         updateTimeThread.start();
+        calendarView.getStylesheets().add("/isw/proyecto/vista/custom.css");
         calendarView.setPrefSize(1219, 713);
         calendarView.setBackground(new Background(new BackgroundFill(Color.web("#4d4e4f"), CornerRadii.EMPTY, Insets.EMPTY)));         
         anchorpane.getChildren().add(calendarView);

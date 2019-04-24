@@ -40,7 +40,7 @@
                   <FontAwesomeIconView fill="#a1aec4" glyphName="CALENDAR" size="17.0" wrappingWidth="42.99997329711914" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="btnPagos" layoutX="10.0" layoutY="109.0" onAction="#switchPagos" prefHeight="42.0" prefWidth="156.0" style="-fx-alignment: center-left;" styleClass="nav-button" text="Pagos" textFill="#a1aec4">
+            <JFXButton fx:id="btnFinanzas" layoutX="10.0" layoutY="109.0" onAction="#switchFinanzas" prefHeight="42.0" prefWidth="156.0" style="-fx-alignment: center-left;" styleClass="nav-button" text="Finanzas" textFill="#a1aec4">
                <font>
                   <Font name="Roboto Bold" size="14.0" />
                </font>
