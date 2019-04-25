@@ -28,6 +28,14 @@ public class AgendaControlador implements Initializable{
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		inicializarAgenda();	
+	}
+	
+	private void inicializarAgenda() {
+		anchorpane.getChildren().add(crearCalendarios());
+	}
+	
+	private CalendarView crearCalendarios() {
 		CalendarView calendarView = new CalendarView(); 
         Calendar asambleas = new Calendar("Asambleas"); 
         Calendar reuniones = new Calendar("Reuniones");      
@@ -63,9 +71,8 @@ public class AgendaControlador implements Initializable{
         updateTimeThread.start();
         calendarView.getStylesheets().add("/isw/proyecto/vista/custom.css");
         calendarView.setPrefSize(1219, 713);
-        calendarView.setBackground(new Background(new BackgroundFill(Color.web("#4d4e4f"), CornerRadii.EMPTY, Insets.EMPTY)));         
-        anchorpane.getChildren().add(calendarView);
-	
+        calendarView.setBackground(new Background(new BackgroundFill(Color.web("#4d4e4f"), CornerRadii.EMPTY, Insets.EMPTY)));
+        return calendarView;
 	}
  
 }

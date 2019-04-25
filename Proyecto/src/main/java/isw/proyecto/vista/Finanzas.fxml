@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXScrollPane?>
 <?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
@@ -29,9 +30,9 @@
                                  <children>
                                     <JFXTreeTableView fx:id="transaccionesTabla" prefHeight="400.0" prefWidth="830.0">
                                        <columns>
-                                          <TreeTableColumn fx:id="tablaFecha" editable="false" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Fecha" />
-                                          <TreeTableColumn editable="false" maxWidth="700.0" prefWidth="700.0" text="Descripción" />
-                                          <TreeTableColumn editable="false" maxWidth="116.0" prefWidth="116.0" resizable="false" text="Monto" />
+                                          <TreeTableColumn fx:id="columnaFecha" editable="false" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Fecha" />
+                                          <TreeTableColumn fx:id="columnaDescripcion" maxWidth="700.0" prefWidth="700.0" text="Descripción" />
+                                          <TreeTableColumn fx:id="columnaMonto" editable="false" maxWidth="116.0" prefWidth="116.0" resizable="false" text="Monto" />
                                        </columns>
                                     </JFXTreeTableView>
                                  </children>
@@ -45,7 +46,27 @@
             </Tab>
             <Tab text="Pagos administración">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="696.0" style="-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-color: white;" />
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="696.0" style="-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-color: white;">
+                     <children>
+                        <Pane layoutX="14.0" layoutY="14.0" prefHeight="653.0" prefWidth="554.0" style="-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-color: white;">
+                           <children>
+                              <JFXScrollPane prefHeight="656.0" prefWidth="554.0">
+                                 <children>
+                                    <JFXTreeTableView fx:id="tablaPagos" editable="true" prefHeight="656.0" prefWidth="290.0">
+                                       <columns>
+                                          <TreeTableColumn fx:id="columnaID" maxWidth="50.0" prefWidth="50.0" text="ID" />
+                                          <TreeTableColumn fx:id="columnaMesAPagar" maxWidth="75.0" prefWidth="75.0" text="Mes a pagar" />
+                                          <TreeTableColumn fx:id="columnaFechaPago" prefWidth="90.0" text="Fecha de pago" />
+                                          <TreeTableColumn fx:id="columnaValorPago" maxWidth="85.0" prefWidth="85.0" text="Valor pago" />
+                                          <TreeTableColumn fx:id="columnaResidente" prefWidth="253.0" text="Residente que pagó" />
+                                       </columns>
+                                    </JFXTreeTableView>
+                                 </children>
+                              </JFXScrollPane>
+                           </children>
+                        </Pane>
+                        <JFXTextField fx:id="campoBusqueda" focusColor="BLACK" layoutX="580.0" layoutY="14.0" promptText="Buscar residente..." />
+                     </children></AnchorPane>
                </content>
             </Tab>
             <Tab text="Facturación">
