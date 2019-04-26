@@ -2,28 +2,21 @@ package isw.proyecto.controlador;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.function.Function;
-
 import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.controls.JFXTreeTableColumn;
-import com.jfoenix.controls.JFXTreeTableView;
-import com.jfoenix.controls.RecursiveTreeItem;
-import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 
 import isw.proyecto.modelo.Residente;
 import isw.proyecto.modelo.decorator.impl.pago.Pago;
 import isw.proyecto.modelo.decorator.impl.pago.PagoAdministracion;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.control.TreeTableColumn;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 
 public class FinanzasControlador implements Initializable{
 	
@@ -34,34 +27,31 @@ public class FinanzasControlador implements Initializable{
     private Label fondosLabel;
 
     @FXML
-    private JFXTreeTableView<?> transaccionesTabla;
+    private TableView<Pago> tablaTransacciones;
 
     @FXML
-    private TreeTableColumn<Pago, String> columnaFecha;
+    private TableColumn<Pago, String> columnaFecha;
 
     @FXML
-    private TreeTableColumn<Pago, String> columnaDescripcion;
+    private TableColumn<Pago, String> columnaDescripcion;
 
     @FXML
-    private TreeTableColumn<Pago, String> columnaMonto;
+    private TableColumn<Pago, String> columnaMonto;
 
     @FXML
-    private TreeTableColumn<Pago, String> columnaID;
+    private TableView<Pago> tablaPagos;
 
     @FXML
-    private TreeTableColumn<Pago, String> columnaMesAPagar;
+    private TableColumn<Pago, String> columnaID;
 
     @FXML
-    private TreeTableColumn<Pago, String> columnaFechaPago;
+    private TableColumn<Pago, String> columnaMes;
 
     @FXML
-    private TreeTableColumn<Pago, String> columnaValorPago;
+    private TableColumn<Pago, String> columnaValor;
 
     @FXML
-    private TreeTableColumn<Pago, String> columnaResidente;
-    
-    @FXML
-    private JFXTreeTableView<?> tablaPagos;
+    private TableColumn<Pago, String> columnaResidente;
 
     @FXML
     private JFXTextField campoBusqueda;
@@ -70,7 +60,36 @@ public class FinanzasControlador implements Initializable{
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {		
-		cambiarEstilo();	
+		cambiarEstilo();
+		Pago pago = new PagoAdministracion(200.0, "26/04/2019", "Abril", (Residente) new Residente.ResidenteBuilder().setNombre("Felipe").setApellido("Vargas").build());
+		Pago pago2 = new PagoAdministracion(200.0, "26/04/2019", "Abril", (Residente) new Residente.ResidenteBuilder().setNombre("asdadasd").setApellido("asdasd").build());
+		Pago pago3 = new PagoAdministracion(200.0, "26/04/2019", "Abril", (Residente) new Residente.ResidenteBuilder().setNombre("Fel3241pe").setApellido("Vasdadeas").build());
+		pagos.add(pago);
+		pagos.add(pago2);
+		pagos.add(pago3);	
+		FilteredList<Pago> datosFiltrados = new FilteredList<>(pagos, p->true); 		
+		campoBusqueda.textProperty().addListener((observable, oldValue, newValue) -> {
+			datosFiltrados.setPredicate(pagoo -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+                if (pagoo.getResidente().getNombre().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (pagoo.getResidente().getApellido().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; 
+                }
+                return false; 
+            });
+        });		
+		SortedList<Pago> datosOrdenados = new SortedList<>(datosFiltrados);	
+		datosOrdenados.comparatorProperty().bind(tablaPagos.comparatorProperty());
+		tablaPagos.setItems(datosOrdenados);		
+		columnaID.setCellValueFactory(cell -> cell.getValue().idProperty());
+		columnaMes.setCellValueFactory(cell -> cell.getValue().mesAPagarProperty());
+		columnaValor.setCellValueFactory(cell -> cell.getValue().valorPagoProperty());
+		columnaResidente.setCellValueFactory(cell -> cell.getValue().residenteProperty());
+		
 	}
 
 	private void cambiarEstilo() {

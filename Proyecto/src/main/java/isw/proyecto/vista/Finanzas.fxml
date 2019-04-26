@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXScrollPane?>
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import com.jfoenix.controls.JFXTextField?>
-<?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
@@ -26,17 +25,13 @@
                         </Pane>
                         <Pane layoutX="152.0" layoutY="193.0" prefHeight="405.0" prefWidth="915.0" style="-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-color: white;">
                            <children>
-                              <JFXScrollPane prefHeight="405.0" prefWidth="916.0">
-                                 <children>
-                                    <JFXTreeTableView fx:id="transaccionesTabla" prefHeight="400.0" prefWidth="830.0">
-                                       <columns>
-                                          <TreeTableColumn fx:id="columnaFecha" editable="false" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Fecha" />
-                                          <TreeTableColumn fx:id="columnaDescripcion" maxWidth="700.0" prefWidth="700.0" text="Descripción" />
-                                          <TreeTableColumn fx:id="columnaMonto" editable="false" maxWidth="116.0" prefWidth="116.0" resizable="false" text="Monto" />
-                                       </columns>
-                                    </JFXTreeTableView>
-                                 </children>
-                              </JFXScrollPane>
+                              <TableView fx:id="tablaTransacciones" prefHeight="408.0" prefWidth="915.0">
+                                <columns>
+                                  <TableColumn fx:id="columnaFecha" maxWidth="100.0" prefWidth="100.0" text="Fecha" />
+                                  <TableColumn fx:id="columnaDescripcion" maxWidth="700.0" prefWidth="700.0" text="Descripción" />
+                                    <TableColumn fx:id="columnaMonto" maxWidth="115.0" prefWidth="115.0" text="Monto" />
+                                </columns>
+                              </TableView>
                            </children>
                         </Pane>
                         <Label layoutX="152.0" layoutY="154.0" prefHeight="38.0" prefWidth="522.0" style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #7387A8;" text="Historial de transacciones" />
@@ -50,19 +45,15 @@
                      <children>
                         <Pane layoutX="14.0" layoutY="14.0" prefHeight="653.0" prefWidth="554.0" style="-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-color: white;">
                            <children>
-                              <JFXScrollPane prefHeight="656.0" prefWidth="554.0">
-                                 <children>
-                                    <JFXTreeTableView fx:id="tablaPagos" editable="true" prefHeight="656.0" prefWidth="290.0">
-                                       <columns>
-                                          <TreeTableColumn fx:id="columnaID" maxWidth="50.0" prefWidth="50.0" text="ID" />
-                                          <TreeTableColumn fx:id="columnaMesAPagar" maxWidth="75.0" prefWidth="75.0" text="Mes a pagar" />
-                                          <TreeTableColumn fx:id="columnaFechaPago" prefWidth="90.0" text="Fecha de pago" />
-                                          <TreeTableColumn fx:id="columnaValorPago" maxWidth="85.0" prefWidth="85.0" text="Valor pago" />
-                                          <TreeTableColumn fx:id="columnaResidente" prefWidth="253.0" text="Residente que pagó" />
-                                       </columns>
-                                    </JFXTreeTableView>
-                                 </children>
-                              </JFXScrollPane>
+                              <TableView fx:id="tablaPagos" prefHeight="653.0" prefWidth="554.0" stylesheets="@custom.css">
+                                <columns>
+                                  <TableColumn fx:id="columnaID" maxWidth="50.0" prefWidth="50.0" text="ID" />
+                                  <TableColumn fx:id="columnaMes" maxWidth="85.0" prefWidth="85.0" text="Mes a pagar" />
+                                    <TableColumn fx:id="columnaFecha" maxWidth="85.0" prefWidth="85.0" text="FechaPago" />
+                                    <TableColumn fx:id="columnaValor" maxWidth="80.0" text="Valor pago" />
+                                    <TableColumn fx:id="columnaResidente" maxWidth="253.0" prefWidth="253.0" text="Residente que pagó" />
+                                </columns>
+                              </TableView>
                            </children>
                         </Pane>
                         <JFXTextField fx:id="campoBusqueda" focusColor="BLACK" layoutX="580.0" layoutY="14.0" promptText="Buscar residente..." />

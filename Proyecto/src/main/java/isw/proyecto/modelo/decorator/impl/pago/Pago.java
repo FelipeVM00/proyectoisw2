@@ -19,6 +19,7 @@ public abstract class Pago implements IPago{
 	}
 	
 	public Pago(double valor, String fecha, String mes, Residente residente) {
+		this.setId(0);
 		this.valorPago = valor;
 		this.setFechaPago(fecha);
 		this.mesAPagar = mes;
@@ -30,7 +31,7 @@ public abstract class Pago implements IPago{
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.id = (int) (Math.random() * 500) + 1;
 	}
 	
 	public Residente getResidente() {
@@ -69,4 +70,28 @@ public abstract class Pago implements IPago{
 		this.mesAPagar = mesAPagar;
 	}
 		
+	public SimpleStringProperty idProperty() {
+		SimpleStringProperty str = new SimpleStringProperty(Integer.toString(id));
+		return str;
+	}
+	
+	public SimpleStringProperty valorPagoProperty() {
+		SimpleStringProperty str = new SimpleStringProperty(Double.toString(valorPago));
+		return str;
+	}
+	
+	public SimpleStringProperty fechaPagoProperty() {
+		SimpleStringProperty str = new SimpleStringProperty(fechaPago.toString());
+		return str;
+	}
+	
+	public SimpleStringProperty mesAPagarProperty() {
+		SimpleStringProperty str = new SimpleStringProperty(mesAPagar);
+		return str;
+	}
+	
+	public SimpleStringProperty residenteProperty() {
+		SimpleStringProperty str = new SimpleStringProperty(residente.getNombre() + " " + residente.getApellido());
+		return str;
+	}
 }
