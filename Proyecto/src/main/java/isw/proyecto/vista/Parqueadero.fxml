@@ -40,12 +40,17 @@
                               <JFXRadioButton layoutX="165.0" layoutY="306.0" text="Visitante" />
                               <Label layoutX="16.0" layoutY="171.0" prefHeight="21.0" prefWidth="78.0" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: gray;" text="Cedula:" />
                               <JFXTextField layoutX="108.0" layoutY="173.0" prefHeight="25.0" prefWidth="231.0" />
+                              <JFXButton buttonType="RAISED" layoutX="120.0" layoutY="381.0" prefHeight="57.0" prefWidth="165.0" ripplerFill="WHITE" style="-fx-background-color: gray;" text="Realizado">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </JFXButton>
                            </children>
                         </Pane>
                         <Pane layoutX="435.0" layoutY="340.0" prefHeight="319.0" prefWidth="349.0" style="-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-color: white;">
                            <children>
                               <Label layoutX="14.0" layoutY="-1.0" prefHeight="91.0" prefWidth="210.0" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #7387A8;" text="Asignación aleatoria" />
-                              <JFXButton buttonType="RAISED" layoutX="91.0" layoutY="131.0" prefHeight="57.0" prefWidth="165.0" ripplerFill="WHITE" style="-fx-background-color: gray;" text="Realizar sorteo">
+                              <JFXButton buttonType="RAISED" layoutX="92.0" layoutY="160.0" prefHeight="57.0" prefWidth="165.0" ripplerFill="WHITE" style="-fx-background-color: gray;" text="Realizar sorteo">
                                  <font>
                                     <Font size="21.0" />
                                  </font>
@@ -95,12 +100,17 @@
                               <JFXRadioButton layoutX="166.0" layoutY="302.0" text="Visitante" />
                               <Label layoutX="17.0" layoutY="167.0" prefHeight="21.0" prefWidth="78.0" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: gray;" text="Cedula:" />
                               <JFXTextField layoutX="109.0" layoutY="169.0" prefHeight="25.0" prefWidth="231.0" />
+                              <JFXButton buttonType="RAISED" layoutX="120.0" layoutY="381.0" prefHeight="57.0" prefWidth="165.0" ripplerFill="WHITE" style="-fx-background-color: gray;" text="Realizado">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </JFXButton>
                            </children>
                         </Pane>
                         <Pane layoutX="435.0" layoutY="343.0" prefHeight="319.0" prefWidth="349.0" style="-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-color: white;">
                            <children>
                               <Label layoutX="14.0" layoutY="-1.0" prefHeight="91.0" prefWidth="210.0" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #7387A8;" text="Asignación aleatoria" />
-                              <JFXButton buttonType="RAISED" layoutX="88.0" layoutY="131.0" prefHeight="57.0" prefWidth="165.0" ripplerFill="#f8f8f8" style="-fx-background-color: gray;" text="Realizar sorteo">
+                              <JFXButton buttonType="RAISED" layoutX="92.0" layoutY="160.0" prefHeight="57.0" prefWidth="165.0" ripplerFill="#f8f8f8" style="-fx-background-color: gray;" text="Realizar sorteo">
                                  <font>
                                     <Font size="21.0" />
                                  </font>
