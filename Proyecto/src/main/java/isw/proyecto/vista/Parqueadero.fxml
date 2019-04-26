@@ -29,15 +29,15 @@
                               <Label layoutX="14.0" layoutY="-1.0" prefHeight="91.0" prefWidth="210.0" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #7387A8;" text="Asignación individual" />
                               <Label layoutX="16.0" layoutY="77.0" prefHeight="13.0" prefWidth="119.0" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: gray;" text="N° Parqueadero:" />
                               <JFXTextField layoutX="157.0" layoutY="76.0" prefHeight="5.0" prefWidth="62.0" />
-                              <Label layoutX="16.0" layoutY="144.0" prefHeight="21.0" prefWidth="78.0" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: gray;" text="Residente:" />
-                              <JFXTextField layoutX="109.0" layoutY="143.0" prefHeight="25.0" prefWidth="231.0" />
-                              <Label layoutX="17.0" layoutY="239.0" prefHeight="21.0" prefWidth="105.0" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: gray;" text="Placa:" />
-                              <JFXTextField layoutX="110.0" layoutY="239.0" prefHeight="25.0" prefWidth="139.0" />
-                              <Label layoutX="17.0" layoutY="293.0" prefHeight="21.0" prefWidth="112.0" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: gray;" text="Tipo:" />
-                              <JFXRadioButton layoutX="164.0" layoutY="298.0" text="Residente" />
-                              <JFXRadioButton layoutX="165.0" layoutY="327.0" text="Visitante" />
-                              <Label layoutX="16.0" layoutY="192.0" prefHeight="21.0" prefWidth="78.0" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: gray;" text="Cedula:" />
-                              <JFXTextField layoutX="108.0" layoutY="194.0" prefHeight="25.0" prefWidth="231.0" />
+                              <Label layoutX="16.0" layoutY="123.0" prefHeight="21.0" prefWidth="78.0" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: gray;" text="Residente:" />
+                              <JFXTextField layoutX="109.0" layoutY="122.0" prefHeight="25.0" prefWidth="231.0" />
+                              <Label layoutX="17.0" layoutY="218.0" prefHeight="21.0" prefWidth="105.0" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: gray;" text="Placa:" />
+                              <JFXTextField layoutX="110.0" layoutY="218.0" prefHeight="25.0" prefWidth="139.0" />
+                              <Label layoutX="17.0" layoutY="272.0" prefHeight="21.0" prefWidth="112.0" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: gray;" text="Tipo:" />
+                              <JFXRadioButton layoutX="164.0" layoutY="277.0" text="Residente" />
+                              <JFXRadioButton layoutX="165.0" layoutY="306.0" text="Visitante" />
+                              <Label layoutX="16.0" layoutY="171.0" prefHeight="21.0" prefWidth="78.0" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: gray;" text="Cedula:" />
+                              <JFXTextField layoutX="108.0" layoutY="173.0" prefHeight="25.0" prefWidth="231.0" />
                            </children>
                         </Pane>
                         <Pane layoutX="825.0" layoutY="139.0" prefHeight="522.0" prefWidth="349.0" style="-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-color: white;">
@@ -76,10 +76,17 @@
                         <Pane layoutX="420.0" layoutY="139.0" prefHeight="522.0" prefWidth="379.0" style="-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-color: white;">
                            <children>
                               <Label layoutX="14.0" layoutY="-1.0" prefHeight="91.0" prefWidth="210.0" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #7387A8;" text="Asignación individual" />
-                              <Label layoutX="14.0" layoutY="75.0" prefHeight="13.0" prefWidth="119.0" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: gray;" text="# Parqueadero:" />
+                              <Label layoutX="14.0" layoutY="75.0" prefHeight="13.0" prefWidth="119.0" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: gray;" text="N° Parqueadero:" />
                               <JFXTextField layoutX="133.0" layoutY="73.0" prefHeight="5.0" prefWidth="62.0" />
-                              <Label layoutX="14.0" layoutY="144.0" prefHeight="21.0" prefWidth="78.0" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: gray;" text="Residente:" />
-                              <JFXTextField layoutX="133.0" layoutY="142.0" prefHeight="25.0" prefWidth="231.0" />
+                              <Label layoutX="17.0" layoutY="119.0" prefHeight="21.0" prefWidth="78.0" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: gray;" text="Residente:" />
+                              <JFXTextField layoutX="110.0" layoutY="118.0" prefHeight="25.0" prefWidth="231.0" />
+                              <Label layoutX="18.0" layoutY="214.0" prefHeight="21.0" prefWidth="105.0" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: gray;" text="Placa:" />
+                              <JFXTextField layoutX="111.0" layoutY="214.0" prefHeight="25.0" prefWidth="139.0" />
+                              <Label layoutX="18.0" layoutY="268.0" prefHeight="21.0" prefWidth="112.0" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: gray;" text="Tipo:" />
+                              <JFXRadioButton layoutX="165.0" layoutY="273.0" text="Residente" />
+                              <JFXRadioButton layoutX="166.0" layoutY="302.0" text="Visitante" />
+                              <Label layoutX="17.0" layoutY="167.0" prefHeight="21.0" prefWidth="78.0" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: gray;" text="Cedula:" />
+                              <JFXTextField layoutX="109.0" layoutY="169.0" prefHeight="25.0" prefWidth="231.0" />
                            </children>
                         </Pane>
                         <Pane layoutX="825.0" layoutY="139.0" prefHeight="522.0" prefWidth="349.0" style="-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-color: white;">
