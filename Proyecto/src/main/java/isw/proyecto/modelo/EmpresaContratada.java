@@ -1,38 +1,51 @@
 package isw.proyecto.modelo;
 
-import java.util.Date;
+import java.net.URL;
 import java.util.List;
+import java.util.ResourceBundle;
+
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 
 public abstract class EmpresaContratada {
 	
-	private String nombre;
-	private Date contratadaDesde;
-	private double costoContrato;
-	private List<Empleado> empleados;
+	public SimpleStringProperty nombre = new SimpleStringProperty();
+	public SimpleStringProperty tipoEmpresa = new SimpleStringProperty();
+	public SimpleStringProperty numeroContrato = new SimpleStringProperty();
+	public SimpleStringProperty telefono = new SimpleStringProperty();
+	public SimpleStringProperty fechaInicio = new SimpleStringProperty();
+	public SimpleStringProperty fechaTerminacion = new SimpleStringProperty();
+	public SimpleStringProperty valorContrato = new SimpleStringProperty();
+	public List<Empleado> empleados;
 	
 	public String getNombre() {
-		return nombre;
+		return nombre.get();
 	}
 	
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+		public String getTipoEmpresa() {
+		return tipoEmpresa.get();
 	}
-	
-	public Date getContratadaDesde() {
-		return contratadaDesde;
+
+	public String getNumeroContrato() {
+		return numeroContrato.get();
 	}
-	
-	public void setContratadaDesde(Date contratadaDesde) {
-		this.contratadaDesde = contratadaDesde;
+
+	public String getTelefono() {
+		return telefono.get();
 	}
-	
-	public double getCostoContrato() {
-		return costoContrato;
+
+	public String getFechaInicio() {
+		return fechaInicio.get();
 	}
-	
-	public void setCostoContrato(double costoContrato) {
-		this.costoContrato = costoContrato;
+
+	public String getFechaTerminacion() {
+		return fechaTerminacion.get();
 	}
+
+	public String getValorContrato() {
+		return valorContrato.get();
+	}
+
 	
 	public List<Empleado> getEmpleados() {
 		return empleados;
@@ -41,6 +54,5 @@ public abstract class EmpresaContratada {
 	public void setEmpleados(List<Empleado> empleados) {
 		this.empleados = empleados;
 	}
-	
 	
 }
