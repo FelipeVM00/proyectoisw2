@@ -8,11 +8,15 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXRadioButton;
+import com.jfoenix.controls.JFXTextField;
 
 import isw.proyecto.modelo.*;
+import isw.proyecto.modelo.decorator.impl.pago.Pago;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -49,6 +53,9 @@ public class EmpresasControlador implements Initializable {
 	@FXML
 	private TextField valorContratoTF;
 
+	@FXML
+	private JFXTextField campoBusqueda;
+
 	/**
 	 * declarando radio buttons
 	 */
@@ -78,7 +85,7 @@ public class EmpresasControlador implements Initializable {
 	private TableColumn<EmpresaContratada, String> fechaTerminacionContratoCL;
 	@FXML
 	private TableColumn<EmpresaContratada, String> valorContratoCL;
-	ObservableList<EmpresaContratada> contratos;
+	ObservableList<EmpresaContratada> contratos = FXCollections.observableArrayList();;
 
 	private int posicionEmpresaEnTabla;
 
@@ -255,7 +262,27 @@ public class EmpresasControlador implements Initializable {
 			c1.setValorContrato(2000000);
 			contratos.add(c1);
 		}
-
+		FilteredList<EmpresaContratada> datosFiltrados = new FilteredList<>(contratos, p -> true);
+		campoBusqueda.textProperty().addListener((observable, oldValue, newValue) -> {
+			datosFiltrados.setPredicate(contratoo -> {
+				if (newValue == null || newValue.isEmpty()) {
+					return true;
+				}
+				String lowerCaseFilter = newValue.toLowerCase();
+				if (contratoo.getNombre().toLowerCase().contains(lowerCaseFilter)) {
+					return true;
+				} else if (contratoo.getNombre().toLowerCase().contains(lowerCaseFilter)) {
+					return true;
+				}
+				return false;
+			});
+		});
+		SortedList<EmpresaContratada> datosOrdenados = new SortedList<>(datosFiltrados);
+		datosOrdenados.comparatorProperty().bind(tablaContratos.comparatorProperty());
+		tablaContratos.setItems(datosOrdenados);
+		nombreCL.setCellValueFactory(cell -> cell.getValue().nombreProperty());
+		tipoEmpresaCL.setCellValueFactory(cell -> cell.getValue().tipoEmpresaProperty());
+		numeroContratoCL.setCellValueFactory(cell -> cell.getValue().numeroContratoProperty());
 	}
 
 }
