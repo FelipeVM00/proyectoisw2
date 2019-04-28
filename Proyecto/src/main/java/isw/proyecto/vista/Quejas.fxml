@@ -1,5 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="713.0" prefWidth="1219.0" stylesheets="@custom.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" />
+<AnchorPane id="AnchorPane" prefHeight="713.0" prefWidth="1219.0" stylesheets="@custom.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <JFXTabPane prefHeight="713.0" prefWidth="1219.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <tabs>
+            <Tab text="Guardado">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Pane layoutX="461.0" layoutY="14.0" prefHeight="89.0" prefWidth="380.0" style="-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-color: white;">
+                           <children>
+                              <Label layoutX="35.0" layoutY="-1.0" prefHeight="91.0" prefWidth="319.0" style="-fx-font-size: 30; -fx-font-weight: bold; -fx-text-fill: #7387A8;" text="GESTIÓN DE QUEJAS" />
+                           </children>
+                        </Pane>
+                        <Label layoutX="15.0" layoutY="178.0" prefHeight="26.0" prefWidth="63.0" style="-fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: gray;" text="Fecha:" />
+                        <JFXDatePicker layoutX="105.0" layoutY="179.0" />
+                        <Label layoutX="15.0" layoutY="246.0" prefHeight="26.0" prefWidth="90.0" style="-fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: gray;" text="Residente:" />
+                        <JFXTextField layoutX="105.0" layoutY="247.0" prefHeight="25.0" prefWidth="158.0" />
+                        <Label layoutX="15.0" layoutY="312.0" prefHeight="26.0" prefWidth="68.0" style="-fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: gray;" text="Cedula:" />
+                        <JFXTextField layoutX="105.0" layoutY="313.0" />
+                        <Label layoutX="13.0" layoutY="382.0" prefHeight="26.0" prefWidth="68.0" style="-fx-font-size: 22; -fx-font-weight: bold; -fx-text-fill: gray;" text="Queja:" />
+                        <JFXButton buttonType="RAISED" layoutX="685.0" layoutY="421.0" prefHeight="45.0" prefWidth="181.0" ripplerFill="WHITE" style="-fx-background-color: gray;" text="Guardar">
+                           <font>
+                              <Font size="21.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton buttonType="RAISED" layoutX="685.0" layoutY="520.0" prefHeight="45.0" prefWidth="181.0" ripplerFill="WHITE" style="-fx-background-color: gray;" text="Limpiar">
+                           <font>
+                              <Font size="21.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXTextArea layoutX="15.0" layoutY="421.0" prefHeight="199.0" prefWidth="636.0" promptText="Escribir..." style="-fx-background-color: white; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5);" wrapText="true">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </JFXTextArea>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Buscar">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Pane layoutX="40.0" layoutY="123.0" prefHeight="496.0" prefWidth="379.0" style="-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-color: white;">
+                           <children>
+                              <TableView layoutX="14.0" layoutY="65.0" prefHeight="400.0" prefWidth="346.0">
+                                <columns>
+                                  <TableColumn prefWidth="178.0" text="Residente" />
+                                  <TableColumn prefWidth="167.0" text="Queja" />
+                                </columns>
+                              </TableView>
+                              <Label layoutX="14.0" layoutY="14.0" prefHeight="51.0" prefWidth="172.0" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #7387A8;" text="Quejas guardadas" />
+                           </children>
+                        </Pane>
+                        <Pane layoutX="420.0" layoutY="14.0" prefHeight="89.0" prefWidth="380.0" style="-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-color: white;">
+                           <children>
+                              <Label layoutX="46.0" layoutY="-1.0" prefHeight="91.0" prefWidth="288.0" style="-fx-font-size: 30; -fx-font-weight: bold; -fx-text-fill: #7387A8;" text="Busqueda de quejas" />
+                           </children>
+                        </Pane>
+                        <JFXTextField layoutX="505.0" layoutY="127.0" prefWidth="173.0" promptText="Buscar residente..." />
+                        <JFXTextArea layoutX="505.0" layoutY="225.0" prefHeight="339.0" prefWidth="639.0" style="-fx-background-color: white; -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5);" />
+                     </children></AnchorPane>
+              </content>
+            </Tab>
+         </tabs>
+      </JFXTabPane>
+   </children>
+</AnchorPane>
