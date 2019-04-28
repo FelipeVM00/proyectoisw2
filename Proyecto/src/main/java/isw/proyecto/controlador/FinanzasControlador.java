@@ -1,6 +1,7 @@
 package isw.proyecto.controlador;
 
 import java.net.URL;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 import org.controlsfx.control.textfield.TextFields;
@@ -12,8 +13,14 @@ import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 
 import isw.proyecto.modelo.Residente;
+import isw.proyecto.modelo.dao.impl.PagoDAOImpl;
 import isw.proyecto.modelo.decorator.impl.pago.Pago;
 import isw.proyecto.modelo.decorator.impl.pago.PagoAdministracion;
+import isw.proyecto.modelo.decorators.DescuentoEspecial;
+import isw.proyecto.modelo.decorators.Multa;
+import isw.proyecto.modelo.decorators.PagoDecorator;
+import isw.proyecto.modelo.decorators.RecargoEspecial;
+import isw.proyecto.util.ExpresionesUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -88,7 +95,7 @@ public class FinanzasControlador implements Initializable{
     private JFXButton btnRecargo;
 
     @FXML
-    private JFXTextField campoValorA;
+    private JFXTextField campoValor;
 
     @FXML
     private Label textoValorA;
@@ -100,13 +107,22 @@ public class FinanzasControlador implements Initializable{
     private JFXButton btnOk;
     
     @FXML
+    private JFXButton btnRecibir;
+    
+    @FXML
     private Pane paneAñadir;
     
     private ObservableList<Pago> pagos = FXCollections.observableArrayList();
-    
-    private Boolean terminoAñadir;
-    
+       
     private String[] nombresResidentes = {"felipe", "andres", "david"};
+    
+    private String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
+    
+    private PagoAdministracion pago;
+    
+    private PagoDecorator decorador = null;
+    
+    private PagoDAOImpl pagoDAO = new PagoDAOImpl();
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {		
@@ -115,6 +131,7 @@ public class FinanzasControlador implements Initializable{
 		paneAñadir.setVisible(false);
 		inicializarBuscador();
 		TextFields.bindAutoCompletion(campoNombre, nombresResidentes);
+		TextFields.bindAutoCompletion(campoMesAPagar, meses);
 		llenarTablaPagos();	
 	}
 
@@ -123,12 +140,15 @@ public class FinanzasControlador implements Initializable{
 	}
 	
 	private void llenarTablaPagos() {
-		Pago pago = new PagoAdministracion(200.0, "26/04/2019", "Abril", (Residente) new Residente.ResidenteBuilder().setNombre("Felipe").setApellido("Vargas").build());
-		Pago pago2 = new PagoAdministracion(200.0, "26/04/2019", "Abril", (Residente) new Residente.ResidenteBuilder().setNombre("asdadasd").setApellido("asdasd").build());
-		Pago pago3 = new PagoAdministracion(200.0, "26/04/2019", "Abril", (Residente) new Residente.ResidenteBuilder().setNombre("Fel3241pe").setApellido("Vasdadeas").build());
+		pagos.addAll(pagoDAO.leerTodo());
+		/*
+		Pago pago = new PagoAdministracion(1, 200.0, "26/04/2019", "Abril", (Residente) new Residente.ResidenteBuilder().setNombre("Felipe").setApellido("Vargas").build());
+		Pago pago2 = new PagoAdministracion(2, 200.0, "26/04/2019", "Abril", (Residente) new Residente.ResidenteBuilder().setNombre("asdadasd").setApellido("asdasd").build());
+		Pago pago3 = new PagoAdministracion(3, 200.0, "26/04/2019", "Abril", (Residente) new Residente.ResidenteBuilder().setNombre("Fel3241pe").setApellido("Vasdadeas").build());
 		pagos.add(pago);
 		pagos.add(pago2);
 		pagos.add(pago3);	
+		*/
 	}
 	
 	private void inicializarBuscador() {
@@ -155,12 +175,13 @@ public class FinanzasControlador implements Initializable{
 	private void inicializarColumnas() {
 		columnaID.setCellValueFactory(cell -> cell.getValue().idProperty());
 		columnaMes.setCellValueFactory(cell -> cell.getValue().mesAPagarProperty());
+		columnaFecha.setCellValueFactory(cell -> cell.getValue().fechaPagoProperty());
 		columnaValor.setCellValueFactory(cell -> cell.getValue().valorPagoProperty());
 		columnaResidente.setCellValueFactory(cell -> cell.getValue().residenteProperty());
 	}
 	
-	public static void mostrarAlerta(String titulo, String msg) {
-        Alert alerta = new Alert(Alert.AlertType.WARNING);
+	public static void mostrarAlerta(String titulo, String msg, Alert.AlertType tipo) {
+        Alert alerta = new Alert(tipo);
         alerta.initStyle(StageStyle.UTILITY);
         alerta.setTitle("Alerta");
         alerta.setHeaderText(titulo);
@@ -170,38 +191,81 @@ public class FinanzasControlador implements Initializable{
 	
 	@FXML
 	void clickBtnDescuento(ActionEvent event) {
-		terminoAñadir = false;	
 		paneAñadir.setVisible(true);
-		campoDetalles.clear();
-		if(terminoAñadir) {			
-			textoValorA.setText("Valor descuento:");
-		}else {
-			mostrarAlerta("No terminó de añadir el descuento", "Por favor termine de añadir el descuento.");
+		btnRecibir.setVisible(false);
+		campoDetalles.clear();		
+		if(campoValor != null) {
+			campoValor.clear();
 		}
+		textoValorA.setText("Valor descuento:");
 	}	  
 
 	@FXML
 	void clickBtnMulta(ActionEvent event) {
 		paneAñadir.setVisible(true);
-		if(terminoAñadir) {			
-			textoValorA.setText("Valor multa:");
-		}else {
-			mostrarAlerta("No terminó de añadir la multa", "Por favor termine de añadir la multa.");
+		btnRecibir.setVisible(false);
+		campoDetalles.clear();
+		if(campoValor != null) {
+			campoValor.clear();
 		}
+		textoValorA.setText("Valor multa:");
 	}
 
 	@FXML
 	void clickBtnRecargo(ActionEvent event) {
 		paneAñadir.setVisible(true);
-		if(terminoAñadir) {			
-			textoValorA.setText("Valor recargo:");
-		}else {
-			mostrarAlerta("No terminó de añadir el recargo", "Por favor termine de añadir el recargo.");
+		btnRecibir.setVisible(false);
+		campoDetalles.clear();			
+		if(campoValor != null) {
+			campoValor.clear();
 		}
+		textoValorA.setText("Valor recargo:");		
 	}    
 	
     @FXML
     void clickBtnOk(ActionEvent event) {
-    	
+    	mostrarAlerta("Operación exitosa !!!", "El valor se añadió satisfactoriamente", Alert.AlertType.INFORMATION);  	
+    	if(textoValorA.getText().contains("multa")) {
+    		decorador = new Multa(pago, campoDetalles.getText(), Double.valueOf(campoValor.getText()));
+    		campoValorPago.setText(Integer.toString(Integer.valueOf(campoValorPago.getText()) + Integer.valueOf(campoValor.getText())));
+    	} 
+    	else if(textoValorA.getText().contains("descuento")) {
+    		decorador = new DescuentoEspecial(pago, campoDetalles.getText(), Double.valueOf(campoValor.getText()));
+    		campoValorPago.setText(Integer.toString(Integer.valueOf(campoValorPago.getText()) - Integer.valueOf(campoValor.getText())));
+    	}
+    	else if(textoValorA.getText().contains("recargo")) {
+    		decorador = new RecargoEspecial(pago, campoDetalles.getText(), Double.valueOf(campoValor.getText()));
+    		campoValorPago.setText(Integer.toString(Integer.valueOf(campoValorPago.getText()) + Integer.valueOf(campoValor.getText())));
+    	}
+    	paneAñadir.setVisible(false);
+    	btnRecibir.setVisible(true);
+    }
+    
+    @FXML
+    void clickBtnRecibir(ActionEvent event) {
+    	if(validarInfo()) {  		
+    		String[] nombre = campoNombre.getText().split(" ");
+        	pago = new PagoAdministracion();
+        	pago.setFechaPago(campoFecha.getValue().format(DateTimeFormatter.ofPattern("d/MM/yyyy")).toString());
+        	pago.setMesAPagar(campoMesAPagar.getText());
+        	pago.setValorPago(Integer.valueOf(campoValorPago.getText()));
+        	pago.setResidente((Residente) new Residente.ResidenteBuilder().setNombre(nombre[0]).setApellido(nombre[1]).build());
+        	pagoDAO.crear(pago);
+        	pagos.add(pago);
+    	}
+    }
+    
+    private boolean validarInfo() {
+    	String nombre = campoNombre.getText().replaceAll("\\s*$","");
+    	if(!ExpresionesUtil.tieneSoloLetras(nombre)) {
+    		System.out.println(nombre.replaceAll("\\s+",""));
+    		mostrarAlerta("Error de ingreso", "En el campo de residente solo pueden ir letras", Alert.AlertType.ERROR);
+    		return false;
+    	}
+    	else if(!ExpresionesUtil.tieneSoloNumeros(campoValorPago.getText())) {
+    		mostrarAlerta("Error de ingreso", "En el campo de valor solo pueden ir numeros", Alert.AlertType.ERROR);
+    		return false;
+    	}
+    	return true;
     }
 }

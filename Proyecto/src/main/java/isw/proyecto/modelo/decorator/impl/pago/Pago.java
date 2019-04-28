@@ -1,9 +1,7 @@
 package isw.proyecto.modelo.decorator.impl.pago;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import isw.proyecto.modelo.Residente;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -11,14 +9,14 @@ public abstract class Pago implements IPago{
 	
 	private int id;
 	private double valorPago;
-	private Date fechaPago;
+	private LocalDate fechaPago;
 	private String mesAPagar;
 	private Residente residente;
 	
 	public Pago() {
 	}
 	
-	public Pago(double valor, String fecha, String mes, Residente residente) {
+	public Pago(int id, double valor, String fecha, String mes, Residente residente) {
 		this.setId(0);
 		this.valorPago = valor;
 		this.setFechaPago(fecha);
@@ -31,7 +29,7 @@ public abstract class Pago implements IPago{
 	}
 
 	public void setId(int id) {
-		this.id = (int) (Math.random() * 500) + 1;
+		this.id = id;
 	}
 	
 	public Residente getResidente() {
@@ -50,16 +48,12 @@ public abstract class Pago implements IPago{
 		this.valorPago = valorPago;
 	}
 
-	public Date getFechaPago() {
+	public LocalDate getFechaPago() {
 		return fechaPago;
 	}
 
 	public void setFechaPago(String fechaPago) {
-		try {
-			this.fechaPago = new SimpleDateFormat("dd/MM/yyyy").parse(fechaPago);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		this.fechaPago = LocalDate.parse(fechaPago, DateTimeFormatter.ofPattern("d/MM/yyyy"));
 	}
 
 	public String getMesAPagar() {

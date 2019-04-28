@@ -2,9 +2,10 @@ package isw.proyecto.modelo.factorymethod;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Properties;
 
-import com.mysql.jdbc.Driver;
+import com.mysql.cj.jdbc.Driver;
 
 import isw.proyecto.util.PropertiesUtil;
 
@@ -19,6 +20,8 @@ public class MySQLDBAdapter implements IDBAdapter{
     private static final String DB_PORT_PROP = "port";
     private static final String DB_USER_PROP = "user";
 
+    public static Connection connection;
+    
     static {
         //Bloque para registrar el Driver de MySQL
         try {
@@ -30,16 +33,13 @@ public class MySQLDBAdapter implements IDBAdapter{
 
     @Override
     public Connection getConnection() {
+    	String connectionString = createConnectionString();
         try {
-            String connectionString = createConnectionString();
-            Connection connection = DriverManager.getConnection(connectionString);
-            System.out.println("Connection class ==> " + connection.getClass().getName());
-            return connection;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-
+			connection = DriverManager.getConnection(connectionString);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}          
+        return connection;
     }
 
     private String createConnectionString() {
@@ -49,9 +49,7 @@ public class MySQLDBAdapter implements IDBAdapter{
         String db = prop.getProperty(DB_NAME_PROP);
         String user = prop.getProperty(DB_USER_PROP);
         String password = prop.getProperty(DB_PASSWORD_PROP);
-
         String connectionString = "jdbc:mysql://" + host + ":" + port + "/" + db + "?user=" + user + "&password=" + password;
-        System.out.println("ConnectionString ==> " + connectionString);
         return connectionString;
     }
 }

@@ -65,7 +65,7 @@
                            <children>
                               <Label layoutX="148.0" layoutY="14.0" prefHeight="55.0" prefWidth="181.0" style="-fx-font-size: 30; -fx-font-weight: bold; -fx-text-fill: #7387A8;" text="Recibir pago" />
                               <JFXTextField fx:id="campoNombre" layoutX="184.0" layoutY="84.0" prefHeight="25.0" prefWidth="278.0" />
-                              <Label layoutX="14.0" layoutY="82.0" prefHeight="29.0" prefWidth="163.0" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: gray;" text="Nombre del  residente:" />
+                              <Label layoutX="14.0" layoutY="82.0" prefHeight="29.0" prefWidth="163.0" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: gray;" text="Nombre del residente:" />
                               <JFXTextField fx:id="campoMesAPagar" layoutX="110.0" layoutY="129.0" prefHeight="25.0" prefWidth="141.0" />
                               <Label layoutX="14.0" layoutY="127.0" prefHeight="29.0" prefWidth="93.0" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: gray;" text="Mes a pagar:" />
                               <Label layoutX="14.0" layoutY="169.0" prefHeight="29.0" prefWidth="114.0" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: gray;" text="Fecha del Pago:" />
@@ -83,6 +83,11 @@
                                  </font>
                               </JFXButton>
                               <JFXButton fx:id="btnRecargo" layoutX="272.0" layoutY="252.0" onAction="#clickBtnRecargo" prefHeight="30.0" prefWidth="114.0" style="-fx-background-color: gray;" text="Añadir recargo" textFill="WHITE">
+                                 <font>
+                                    <Font name="Roboto Medium" size="14.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXButton fx:id="btnRecibir" layoutX="12.0" layoutY="300.0" onAction="#clickBtnRecibir" prefHeight="30.0" prefWidth="114.0" style="-fx-background-color: #7387A8;" text="Recibir pago" textFill="WHITE">
                                  <font>
                                     <Font name="Roboto Medium" size="14.0" />
                                  </font>
