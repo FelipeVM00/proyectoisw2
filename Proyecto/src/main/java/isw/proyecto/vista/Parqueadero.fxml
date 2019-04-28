@@ -8,6 +8,7 @@
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.control.TreeTableColumn?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
@@ -36,8 +37,11 @@
                               <Label layoutX="17.0" layoutY="218.0" prefHeight="21.0" prefWidth="105.0" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: gray;" text="Placa:" />
                               <JFXTextField layoutX="110.0" layoutY="218.0" prefHeight="25.0" prefWidth="139.0" />
                               <Label layoutX="17.0" layoutY="272.0" prefHeight="21.0" prefWidth="112.0" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: gray;" text="Tipo:" />
-                              <JFXRadioButton layoutX="164.0" layoutY="277.0" text="Residente" />
-                              <JFXRadioButton layoutX="165.0" layoutY="306.0" text="Visitante" />
+                              <JFXRadioButton layoutX="164.0" layoutY="277.0" text="Residente">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="tipoVisitante" />
+                                 </toggleGroup></JFXRadioButton>
+                              <JFXRadioButton layoutX="165.0" layoutY="306.0" text="Visitante" toggleGroup="$tipoVisitante" />
                               <Label layoutX="16.0" layoutY="171.0" prefHeight="21.0" prefWidth="78.0" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: gray;" text="Cedula:" />
                               <JFXTextField layoutX="108.0" layoutY="173.0" prefHeight="25.0" prefWidth="231.0" />
                               <JFXButton buttonType="RAISED" layoutX="120.0" layoutY="381.0" prefHeight="57.0" prefWidth="165.0" ripplerFill="WHITE" style="-fx-background-color: gray;" text="Realizado">
@@ -96,8 +100,8 @@
                               <Label layoutX="18.0" layoutY="214.0" prefHeight="21.0" prefWidth="105.0" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: gray;" text="Placa:" />
                               <JFXTextField layoutX="111.0" layoutY="214.0" prefHeight="25.0" prefWidth="139.0" />
                               <Label layoutX="18.0" layoutY="268.0" prefHeight="21.0" prefWidth="112.0" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: gray;" text="Tipo:" />
-                              <JFXRadioButton layoutX="165.0" layoutY="273.0" text="Residente" />
-                              <JFXRadioButton layoutX="166.0" layoutY="302.0" text="Visitante" />
+                              <JFXRadioButton layoutX="165.0" layoutY="273.0" text="Residente" toggleGroup="$tipoVisitante" />
+                              <JFXRadioButton layoutX="166.0" layoutY="302.0" text="Visitante" toggleGroup="$tipoVisitante" />
                               <Label layoutX="17.0" layoutY="167.0" prefHeight="21.0" prefWidth="78.0" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: gray;" text="Cedula:" />
                               <JFXTextField layoutX="109.0" layoutY="169.0" prefHeight="25.0" prefWidth="231.0" />
                               <JFXButton buttonType="RAISED" layoutX="120.0" layoutY="381.0" prefHeight="57.0" prefWidth="165.0" ripplerFill="WHITE" style="-fx-background-color: gray;" text="Realizado">
