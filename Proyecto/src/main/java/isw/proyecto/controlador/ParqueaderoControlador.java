@@ -20,9 +20,6 @@ public class ParqueaderoControlador implements Initializable{
     private JFXTabPane pestañasPane;
 
     @FXML
-    private JFXButton asignarParqueoIndvCarro;
-
-    @FXML
     private TreeTableColumn<?, ?> numeroParqueoCarro;
 
     @FXML
@@ -42,6 +39,9 @@ public class ParqueaderoControlador implements Initializable{
 
     @FXML
     private JFXTextField cedulaResidenteCarro;
+
+    @FXML
+    private JFXButton asignarParqueoIndvCarro;
 
     @FXML
     private JFXButton sorteoAleatorioCarro;
