@@ -1,13 +1,13 @@
 package isw.proyecto.controlador;
 
 import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 import java.net.URL;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import com.jfoenix.controls.JFXRadioButton;
 
 import isw.proyecto.modelo.*;
 import javafx.collections.FXCollections;
@@ -21,7 +21,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class EmpresasControlador implements Initializable {
 
-	// declarando botones
+	/**
+	 * declarando botones
+	 */
 	@FXML
 	private Button aniadirBT;
 	@FXML
@@ -31,7 +33,9 @@ public class EmpresasControlador implements Initializable {
 	@FXML
 	private Button nuevoBT;
 
-	// declarando textfields
+	/**
+	 * declarando textfields
+	 */
 	@FXML
 	private TextField nombreTF;
 	@FXML
@@ -44,36 +48,45 @@ public class EmpresasControlador implements Initializable {
 	private TextField fechaTerminacionTF;
 	@FXML
 	private TextField valorContratoTF;
-	
-	//declarando radio buttons
-	@FXML
-	private RadioButton tipoEmpresaAseoRB;
-	@FXML
-	private RadioButton tipoEmpresaMantenimientoRB;
-	@FXML
-	private RadioButton tipoEmpresaVigilanciaRB;
 
-	// declarando tablas y columnas
+	/**
+	 * declarando radio buttons
+	 */
+	@FXML
+	private JFXRadioButton tipoEmpresaAseoRB;
+	@FXML
+	private JFXRadioButton tipoEmpresaMantenimientoRB;
+	@FXML
+	private JFXRadioButton tipoEmpresaVigilanciaRB;
+
+	/**
+	 * declarando tablas y columnas
+	 */
 	@FXML
 	private TableView<EmpresaContratada> tablaContratos;
 	@FXML
-	private TableColumn nombreCL;
+	private TableColumn<EmpresaContratada, String> nombreCL;
 	@FXML
-	private TableColumn tipoEmpresaCL;
+	private TableColumn<EmpresaContratada, String> tipoEmpresaCL;
 	@FXML
-	private TableColumn numeroContratoCL;
+	private TableColumn<EmpresaContratada, String> numeroContratoCL;
 	@FXML
-	private TableColumn telefonoCL;
+	private TableColumn<EmpresaContratada, String> telefonoCL;
 	@FXML
-	private TableColumn fechaInicioContratoCL;
+	private TableColumn<EmpresaContratada, String> fechaInicioContratoCL;
 	@FXML
-	private TableColumn fechaTerminacionContratoCL;
+	private TableColumn<EmpresaContratada, String> fechaTerminacionContratoCL;
 	@FXML
-	private TableColumn valorContratoCL;
+	private TableColumn<EmpresaContratada, String> valorContratoCL;
 	ObservableList<EmpresaContratada> contratos;
 
 	private int posicionEmpresaEnTabla;
 
+	/**
+	 * Metodo que realiza las acciones tras pulsar el boton "Nuevo"
+	 *
+	 * @param event
+	 */
 	@FXML
 	private void nuevo(ActionEvent event) {
 		nombreTF.setText("");
@@ -83,10 +96,15 @@ public class EmpresasControlador implements Initializable {
 		fechaTerminacionTF.setText("");
 		valorContratoTF.setText("");
 		modificarBT.setDisable(true);
-        eliminarBT.setDisable(true);
-        aniadirBT.setDisable(false);
+		eliminarBT.setDisable(true);
+		aniadirBT.setDisable(false);
 	}
 
+	/**
+	 * Metodo que realiza las acciones tras pulsar el boton "Añadir"
+	 *
+	 * @param event
+	 */
 	@FXML
 	private void aniadir(ActionEvent event) {
 		EmpresaContratada empresas = new EmpresaAseo();
@@ -95,11 +113,16 @@ public class EmpresasControlador implements Initializable {
 		empresas.setNumeroContrato(numeroContratoTF.getText());
 		empresas.setTelefono(Integer.parseInt(telefonoTF.getText()));
 		empresas.setFechaInicio(fechaInicioTF.getText());
-		//empresas.setFechaTerminacion(fechaTerminacionTF.getText());
+		// empresas.setFechaTerminacion(fechaTerminacionTF.getText());
 		empresas.setValorContrato(Double.parseDouble(valorContratoTF.getText()));
 		contratos.add(empresas);
 	}
 
+	/**
+	 * Metodo que realiza las acciones tras pulsar el boton "Modificar"
+	 *
+	 * @param event
+	 */
 	@FXML
 	private void modificar(ActionEvent event) {
 		EmpresaContratada empresas = new EmpresaAseo();
@@ -113,11 +136,19 @@ public class EmpresasControlador implements Initializable {
 		contratos.set(posicionEmpresaEnTabla, empresas);
 	}
 
+	/**
+	 * Metodo que realiza las acciones tras pulsar el boton "Eliminar"
+	 *
+	 * @param event
+	 */
 	@FXML
 	private void eliminar(ActionEvent event) {
 		contratos.remove(posicionEmpresaEnTabla);
 	}
 
+	/**
+	 * Listener de la tabla EmpresaContratada
+	 */
 	private final ListChangeListener<EmpresaContratada> selectorTablaEmpresas = new ListChangeListener<EmpresaContratada>() {
 		@Override
 		public void onChanged(ListChangeListener.Change<? extends EmpresaContratada> c) {
@@ -125,9 +156,9 @@ public class EmpresasControlador implements Initializable {
 		}
 	};
 
-	
-	 //PARA SELECCIONAR UNA CELDA DE LA TABLA "tablaContratos"
-	 
+	/**
+	 * PARA SELECCIONAR UNA CELDA DE LA TABLA "tablaContratos"
+	 */
 	public EmpresaContratada getTablaEmpresaSeleccionada() {
 		if (tablaContratos != null) {
 			List<EmpresaContratada> tabla = tablaContratos.getSelectionModel().getSelectedItems();
@@ -139,39 +170,49 @@ public class EmpresasControlador implements Initializable {
 		return null;
 	}
 
-	// Metodo para poner en los textFields la tupla que selccionemos
-	 
+	/**
+	 * Metodo para poner en los textFields la tupla que selccionemos
+	 */
+
 	private void ponerEmpresaSeleccionada() {
 		final EmpresaContratada empresas = getTablaEmpresaSeleccionada();
 		posicionEmpresaEnTabla = contratos.indexOf(empresas);
 
 		if (empresas != null) {
 
-			// Pongo los textFields con los datos correspondientes
+			/**
+			 * Pongo los textFields con los datos correspondientes
+			 */
 			nombreTF.setText(empresas.getNombre());
-			//tipo empresa
+			// tipo empresa
 			numeroContratoTF.setText(empresas.getNumeroContrato());
 			telefonoTF.setText(empresas.getTelefono().toString());
 			fechaInicioTF.setText(empresas.getFechaInicio().toString());
 			fechaTerminacionTF.setText(empresas.getFechaTerminacion());
 			valorContratoTF.setText(empresas.getValorContrato().toString());
 
-			// Pongo los botones en su estado correspondiente
+			/**
+			 * Pongo los botones en su estado correspondiente
+			 */
 			modificarBT.setDisable(false);
 			eliminarBT.setDisable(false);
 			aniadirBT.setDisable(true);
 		}
 	}
 
-	// Metodo para inicializar la tabla
-	 
+	/**
+	 * Metodo para inicializar la tabla
+	 */
+
 	private void inicializarTablaContratos() {
 		nombreCL.setCellValueFactory(new PropertyValueFactory<EmpresaContratada, String>("nombre"));
 		tipoEmpresaCL.setCellValueFactory(new PropertyValueFactory<EmpresaContratada, String>("tipo de empresa"));
 		numeroContratoCL.setCellValueFactory(new PropertyValueFactory<EmpresaContratada, String>("numero de contrato"));
 		telefonoCL.setCellValueFactory(new PropertyValueFactory<EmpresaContratada, String>("telefono"));
-		fechaInicioContratoCL.setCellValueFactory(new PropertyValueFactory<EmpresaContratada, String>("fecha de inicio de contrato"));
-		fechaTerminacionContratoCL.setCellValueFactory(new PropertyValueFactory<EmpresaContratada, String>("fecha de termino de contrato"));
+		fechaInicioContratoCL.setCellValueFactory(
+				new PropertyValueFactory<EmpresaContratada, String>("fecha de inicio de contrato"));
+		fechaTerminacionContratoCL.setCellValueFactory(
+				new PropertyValueFactory<EmpresaContratada, String>("fecha de termino de contrato"));
 		valorContratoCL.setCellValueFactory(new PropertyValueFactory<EmpresaContratada, String>("valor contrato"));
 
 		contratos = FXCollections.observableArrayList();
@@ -182,29 +223,38 @@ public class EmpresasControlador implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 
-		// Inicializamos la tabla
+		/**
+		 * Inicializamos la tabla
+		 */
 		this.inicializarTablaContratos();
-		
-		// Ponemos estos dos botones para que no se puedan seleccionar
-        modificarBT.setDisable(true);
-        eliminarBT.setDisable(true);
 
-		// Seleccionar las tuplas de la tabla de las empresas
-		final ObservableList<EmpresaContratada> tablaContratosSel = tablaContratos.getSelectionModel().getSelectedItems();
+		/**
+		 * Ponemos estos dos botones para que no se puedan seleccionar
+		 */
+		modificarBT.setDisable(true);
+		eliminarBT.setDisable(true);
+
+		/**
+		 * Seleccionar las tuplas de la tabla de las empresas
+		 */
+		final ObservableList<EmpresaContratada> tablaContratosSel = tablaContratos.getSelectionModel()
+				.getSelectedItems();
 		tablaContratosSel.addListener(selectorTablaEmpresas);
-		
-		// Inicializamos la tabla con algunos datos aleatorios
-        for (int i = 0; i < 5; i++) {
-            EmpresaContratada c1 = new EmpresaAseo();
-            c1.setNombre("Nombre empresa " + i);
-            //c1.setTipoEmpresa(tipoEmpresaAseoRB);
-            c1.setNumeroContrato("abcd" + i);
-            c1.setTelefono(12345 + i);
-            c1.setFechaInicio("31/12/2019");
-            c1.setFechaTerminacion("12345"+i);
-            c1.setValorContrato(2000000000);
-            contratos.add(c1);
-        }
+
+		/**
+		 * Inicializamos la tabla con algunos datos aleatorios
+		 */
+		for (int i = 0; i < 5; i++) {
+			EmpresaContratada c1 = new EmpresaAseo();
+			c1.setNombre("Nombre empresa " + i);
+			// c1.setTipoEmpresa(tipoEmpresaAseoRB);
+			c1.setNumeroContrato("abcd" + i);
+			c1.setTelefono(12345 + i);
+			c1.setFechaInicio("31/12/2019");
+			c1.setFechaTerminacion("12345" + i);
+			c1.setValorContrato(2000000);
+			contratos.add(c1);
+		}
 
 	}
 

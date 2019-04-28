@@ -9,6 +9,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
@@ -127,9 +128,12 @@
                                           <Font name="System Bold" size="12.0" />
                                        </font>
                                     </Button>
-                                    <JFXRadioButton fx:id="tipoEmpresaAseoRB" layoutX="34.0" layoutY="121.0" text="Aseo" />
-                                    <JFXRadioButton fx:id="tipoEmpresaMantenimientoRB" layoutX="110.0" layoutY="121.0" text="Mantenimiento" />
-                                    <JFXRadioButton fx:id="tipoEmpresaVigilanciaRB" layoutX="231.0" layoutY="121.0" text="Vigilancia" />
+                                    <JFXRadioButton fx:id="tipoEmpresaAseoRB" layoutX="34.0" layoutY="121.0" text="Aseo">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="tipoEmpresa" />
+                                       </toggleGroup></JFXRadioButton>
+                                    <JFXRadioButton fx:id="tipoEmpresaMantenimientoRB" layoutX="110.0" layoutY="121.0" text="Mantenimiento" toggleGroup="$tipoEmpresa" />
+                                    <JFXRadioButton fx:id="tipoEmpresaVigilanciaRB" layoutX="231.0" layoutY="121.0" text="Vigilancia" toggleGroup="$tipoEmpresa" />
                                  </children>
                               </AnchorPane>
                           </items>
