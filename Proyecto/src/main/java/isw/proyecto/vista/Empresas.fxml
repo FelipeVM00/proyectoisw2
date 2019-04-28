@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXRadioButton?>
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import com.jfoenix.controls.JFXTextField?>
@@ -89,7 +90,6 @@
                                     <TextField fx:id="nombreTF" layoutX="34.0" layoutY="62.0" prefHeight="25.0" prefWidth="313.0" />
                                     <TextField fx:id="numeroContratoTF" layoutX="36.0" layoutY="168.0" prefHeight="25.0" prefWidth="310.0" />
                                     <TextField fx:id="telefonoTF" layoutX="36.0" layoutY="226.0" prefHeight="25.0" prefWidth="310.0" />
-                                    <TextField fx:id="fechaInicioTF" layoutX="36.0" layoutY="278.0" prefHeight="25.0" prefWidth="310.0" />
                                     <TextField fx:id="fechaTerminacionTF" layoutX="36.0" layoutY="333.0" prefHeight="25.0" prefWidth="310.0" />
                                     <TextField fx:id="valorContratoTF" layoutX="38.0" layoutY="387.0" prefHeight="25.0" prefWidth="310.0" />
                                     <Button fx:id="aniadirBT" layoutX="36.0" layoutY="425.0" mnemonicParsing="false" onAction="#aniadir" prefHeight="25.0" prefWidth="310.0" text="AÑADIR">
@@ -118,11 +118,12 @@
                                        </toggleGroup></JFXRadioButton>
                                     <JFXRadioButton fx:id="tipoEmpresaMantenimientoRB" layoutX="110.0" layoutY="121.0" text="Mantenimiento" toggleGroup="$tipoEmpresa" />
                                     <JFXRadioButton fx:id="tipoEmpresaVigilanciaRB" layoutX="231.0" layoutY="121.0" text="Vigilancia" toggleGroup="$tipoEmpresa" />
+                                    <JFXDatePicker fx:id="fechaInicioDP" defaultColor="BLACK" layoutX="34.0" layoutY="283.0" prefHeight="25.0" prefWidth="310.0" />
                                  </children>
                               </AnchorPane>
                           </items>
                         </SplitPane>
-                        <JFXTextField fx:id="campoBusqueda" focusColor="BLACK" layoutX="1068.0" layoutY="60.0" promptText="Buscar Empresa..." />
+                        <JFXTextField fx:id="campoBusqueda" focusColor="BLACK" layoutX="947.0" layoutY="60.0" prefHeight="25.0" prefWidth="256.0" promptText="Buscar Nombre de Empresa..." />
                      </children>
                   </AnchorPane>
               </content>

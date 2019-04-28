@@ -5,8 +5,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.control.DatePicker;
 
 public abstract class EmpresaContratada {
 
@@ -14,7 +16,7 @@ public abstract class EmpresaContratada {
 	public String tipoEmpresa;
 	public String numeroContrato;
 	public int telefono;
-	public Date fechaInicio;
+	public DatePicker fechaInicio;
 	public String fechaTerminacion;
 	public double valorContrato;
 	public List<Empleado> empleados;
@@ -22,7 +24,7 @@ public abstract class EmpresaContratada {
 	public EmpresaContratada() {
 	}
 
-	public EmpresaContratada(String nom, String tipoEmpresa, String numContrato, int telefono, Date fechaInicio, String fechaTerminacion,
+	public EmpresaContratada(String nom, String tipoEmpresa, String numContrato, int telefono, DatePicker fechaInicio, String fechaTerminacion,
 			double valorContrato) {
 		this.nombre = nom;
 		this.tipoEmpresa = tipoEmpresa;
@@ -67,16 +69,12 @@ public abstract class EmpresaContratada {
 		this.telefono = telefono;
 	}
 	
-	public Date getFechaInicio() {
+	public DatePicker getFechaInicio() {
 		return fechaInicio;
 	}
 
-	public void setFechaInicio(String fechaInicio) {
-		try {
-			this.fechaInicio = new SimpleDateFormat("dd/MM/yyyy").parse(fechaInicio);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+	public void setFechaInicio(DatePicker fechaInicio) {
+		this.fechaInicio = fechaInicio;
 	}
 
 	public String getFechaTerminacion() {
