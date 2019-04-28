@@ -2,6 +2,8 @@ package isw.proyecto.controlador;
 
 import java.net.URL;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import org.controlsfx.control.textfield.TextFields;
@@ -114,7 +116,7 @@ public class FinanzasControlador implements Initializable{
     
     private ObservableList<Pago> pagos = FXCollections.observableArrayList();
        
-    private String[] nombresResidentes = {"felipe", "andres", "david"};
+    private List<String> nombresResidentes = new ArrayList<String>();
     
     private String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
     
@@ -125,7 +127,7 @@ public class FinanzasControlador implements Initializable{
     private PagoDAOImpl pagoDAO = new PagoDAOImpl();
 
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {		
+	public void initialize(URL arg0, ResourceBundle arg1) {	
 		cambiarEstilo();
 		inicializarColumnas();
 		paneAñadir.setVisible(false);
@@ -141,17 +143,13 @@ public class FinanzasControlador implements Initializable{
 	
 	private void llenarTablaPagos() {
 		pagos.addAll(pagoDAO.leerTodo());
-		/*
-		Pago pago = new PagoAdministracion(1, 200.0, "26/04/2019", "Abril", (Residente) new Residente.ResidenteBuilder().setNombre("Felipe").setApellido("Vargas").build());
-		Pago pago2 = new PagoAdministracion(2, 200.0, "26/04/2019", "Abril", (Residente) new Residente.ResidenteBuilder().setNombre("asdadasd").setApellido("asdasd").build());
-		Pago pago3 = new PagoAdministracion(3, 200.0, "26/04/2019", "Abril", (Residente) new Residente.ResidenteBuilder().setNombre("Fel3241pe").setApellido("Vasdadeas").build());
-		pagos.add(pago);
-		pagos.add(pago2);
-		pagos.add(pago3);	
-		*/
 	}
 	
 	private void inicializarBuscador() {
+		
+		for(Pago p : tablaPagos.getItems()) {
+			nombresResidentes.add(columnaResidente.getCellObservableValue(p).getValue());
+		}
 		FilteredList<Pago> datosFiltrados = new FilteredList<>(pagos, p->true); 		
 		campoBusqueda.textProperty().addListener((observable, oldValue, newValue) -> {
 			datosFiltrados.setPredicate(pagoo -> {
