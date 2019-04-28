@@ -1,11 +1,14 @@
 package isw.proyecto.controlador;
 
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import javax.swing.JOptionPane;
 
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
@@ -22,6 +25,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.StageStyle;
 
 public class EmpresasControlador implements Initializable {
 
@@ -107,6 +111,15 @@ public class EmpresasControlador implements Initializable {
 		aniadirBT.setDisable(false);
 	}
 
+	public static void mostrarAlerta(String titulo, String msg) {
+		Alert alerta = new Alert(Alert.AlertType.WARNING);
+		alerta.initStyle(StageStyle.UTILITY);
+		alerta.setTitle("Alerta");
+		alerta.setHeaderText(titulo);
+		alerta.setContentText(msg);
+		alerta.showAndWait();
+	}
+
 	/**
 	 * Metodo que realiza las acciones tras pulsar el boton "Añadir"
 	 *
@@ -114,6 +127,12 @@ public class EmpresasControlador implements Initializable {
 	 */
 	@FXML
 	private void aniadir(ActionEvent event) {
+		if (nombreTF.getText().isEmpty() || numeroContratoTF.getText().isEmpty() || telefonoTF.getText().isEmpty()
+				|| fechaInicioTF.getText().isEmpty() || fechaTerminacionTF.getText().isEmpty()
+				|| valorContratoTF.getText().isEmpty()) {
+			mostrarAlerta("Informacion Incompleta", "Por favor termine de rellenar todos los campos");
+
+		}
 		EmpresaContratada empresas = new EmpresaAseo();
 		empresas.setNombre(nombreTF.getText());
 		empresas.setTipoEmpresa(tipoEmpresaAseoRB.getText());
@@ -123,6 +142,7 @@ public class EmpresasControlador implements Initializable {
 		// empresas.setFechaTerminacion(fechaTerminacionTF.getText());
 		empresas.setValorContrato(Double.parseDouble(valorContratoTF.getText()));
 		contratos.add(empresas);
+
 	}
 
 	/**
