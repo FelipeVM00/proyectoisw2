@@ -14,11 +14,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="713.0" prefWidth="1219.0" stylesheets="@custom.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="713.0" prefWidth="1219.0" stylesheets="@custom.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="isw.proyecto.controlador.ParqueaderoControlador">
    <children>
       <JFXTabPane fx:id="pestañasPane" layoutX="20.0" layoutY="66.0" prefHeight="713.0" prefWidth="1219.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <tabs>
-            <Tab text="Carros">
+            <Tab fx:id="asignarParqueoIndvCarro" text="Carros">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -31,20 +31,20 @@
                            <children>
                               <Label layoutX="14.0" layoutY="-1.0" prefHeight="91.0" prefWidth="210.0" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #7387A8;" text="Asignación individual" />
                               <Label layoutX="16.0" layoutY="77.0" prefHeight="13.0" prefWidth="119.0" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: gray;" text="N° Parqueadero:" />
-                              <JFXTextField layoutX="157.0" layoutY="76.0" prefHeight="5.0" prefWidth="62.0" />
+                              <JFXTextField fx:id="numeroParqueoCarro" layoutX="157.0" layoutY="76.0" prefHeight="5.0" prefWidth="62.0" />
                               <Label layoutX="16.0" layoutY="123.0" prefHeight="21.0" prefWidth="78.0" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: gray;" text="Residente:" />
-                              <JFXTextField layoutX="109.0" layoutY="122.0" prefHeight="25.0" prefWidth="231.0" />
+                              <JFXTextField fx:id="nombreResidenteCarro" layoutX="109.0" layoutY="122.0" prefHeight="25.0" prefWidth="231.0" />
                               <Label layoutX="17.0" layoutY="218.0" prefHeight="21.0" prefWidth="105.0" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: gray;" text="Placa:" />
-                              <JFXTextField layoutX="110.0" layoutY="218.0" prefHeight="25.0" prefWidth="139.0" />
+                              <JFXTextField fx:id="placaVehiculoCarro" layoutX="110.0" layoutY="218.0" prefHeight="25.0" prefWidth="139.0" />
                               <Label layoutX="17.0" layoutY="272.0" prefHeight="21.0" prefWidth="112.0" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: gray;" text="Tipo:" />
-                              <JFXRadioButton layoutX="164.0" layoutY="277.0" text="Residente">
+                              <JFXRadioButton fx:id="tipoResidenteCarro" layoutX="164.0" layoutY="277.0" text="Residente">
                                  <toggleGroup>
                                     <ToggleGroup fx:id="tipoVisitante" />
                                  </toggleGroup></JFXRadioButton>
-                              <JFXRadioButton layoutX="165.0" layoutY="306.0" text="Visitante" toggleGroup="$tipoVisitante" />
+                              <JFXRadioButton fx:id="tipoVisitanteCarro" layoutX="165.0" layoutY="306.0" text="Visitante" toggleGroup="$tipoVisitante" />
                               <Label layoutX="16.0" layoutY="171.0" prefHeight="21.0" prefWidth="78.0" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: gray;" text="Cedula:" />
-                              <JFXTextField layoutX="108.0" layoutY="173.0" prefHeight="25.0" prefWidth="231.0" />
-                              <JFXButton buttonType="RAISED" layoutX="120.0" layoutY="381.0" prefHeight="57.0" prefWidth="165.0" ripplerFill="WHITE" style="-fx-background-color: gray;" text="Realizado">
+                              <JFXTextField fx:id="cedulaResidenteCarro" layoutX="108.0" layoutY="173.0" prefHeight="25.0" prefWidth="231.0" />
+                              <JFXButton fx:id="asignarParqueoIndvCarro" buttonType="RAISED" layoutX="134.0" layoutY="383.0" prefHeight="27.0" prefWidth="139.0" ripplerFill="WHITE" style="-fx-background-color: gray;" text="Asignar">
                                  <font>
                                     <Font size="21.0" />
                                  </font>
@@ -54,7 +54,7 @@
                         <Pane layoutX="435.0" layoutY="340.0" prefHeight="319.0" prefWidth="349.0" style="-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-color: white;">
                            <children>
                               <Label layoutX="14.0" layoutY="-1.0" prefHeight="91.0" prefWidth="210.0" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #7387A8;" text="Asignación aleatoria" />
-                              <JFXButton buttonType="RAISED" layoutX="92.0" layoutY="160.0" prefHeight="57.0" prefWidth="165.0" ripplerFill="WHITE" style="-fx-background-color: gray;" text="Realizar sorteo">
+                              <JFXButton fx:id="sorteoAleatorioCarro" buttonType="RAISED" layoutX="84.0" layoutY="160.0" prefHeight="45.0" prefWidth="181.0" ripplerFill="WHITE" style="-fx-background-color: gray;" text="Realizar sorteo">
                                  <font>
                                     <Font size="21.0" />
                                  </font>
@@ -66,17 +66,17 @@
                               <Label layoutX="14.0" layoutY="-1.0" prefHeight="91.0" prefWidth="210.0" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #7387A8;" text="Asignación actual" />
                               <JFXScrollPane layoutY="75.0" prefHeight="450.0" prefWidth="379.0">
                                  <children>
-                                    <JFXTreeTableView fx:id="transaccionesTabla" prefHeight="379.0" prefWidth="830.0">
+                                    <JFXTreeTableView fx:id="tablaTotalAsignacionCarro" prefHeight="379.0" prefWidth="830.0">
                                        <columns>
-                                          <TreeTableColumn editable="false" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="# Parqueadero" />
-                                          <TreeTableColumn editable="false" maxWidth="279.0" minWidth="100.0" prefWidth="279.0" text="Residente asignado" />
+                                          <TreeTableColumn fx:id="numeroParqueoCarro" editable="false" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="# Parqueadero" />
+                                          <TreeTableColumn fx:id="tablaAsignacionCarro" editable="false" maxWidth="279.0" minWidth="100.0" prefWidth="279.0" text="Residente asignado" />
                                        </columns>
                                     </JFXTreeTableView>
                                  </children>
                               </JFXScrollPane>
                            </children>
                         </Pane>
-                        <JFXTextField layoutX="435.0" layoutY="135.0" promptText="Buscar asignación..." />
+                        <JFXTextField fx:id="bucarAsignacionCarro" layoutX="523.0" layoutY="225.0" prefHeight="25.0" prefWidth="173.0" promptText="Buscar asignación..." />
                      </children>
                   </AnchorPane>
                </content>
@@ -94,17 +94,17 @@
                            <children>
                               <Label layoutX="14.0" layoutY="-1.0" prefHeight="91.0" prefWidth="210.0" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #7387A8;" text="Asignación individual" />
                               <Label layoutX="14.0" layoutY="75.0" prefHeight="13.0" prefWidth="119.0" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: gray;" text="N° Parqueadero:" />
-                              <JFXTextField layoutX="133.0" layoutY="73.0" prefHeight="5.0" prefWidth="62.0" />
+                              <JFXTextField fx:id="numeroParqueoMoto" layoutX="133.0" layoutY="73.0" prefHeight="5.0" prefWidth="62.0" />
                               <Label layoutX="17.0" layoutY="119.0" prefHeight="21.0" prefWidth="78.0" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: gray;" text="Residente:" />
-                              <JFXTextField layoutX="110.0" layoutY="118.0" prefHeight="25.0" prefWidth="231.0" />
+                              <JFXTextField fx:id="nombreResidenteMoto" layoutX="110.0" layoutY="118.0" prefHeight="25.0" prefWidth="231.0" />
                               <Label layoutX="18.0" layoutY="214.0" prefHeight="21.0" prefWidth="105.0" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: gray;" text="Placa:" />
-                              <JFXTextField layoutX="111.0" layoutY="214.0" prefHeight="25.0" prefWidth="139.0" />
+                              <JFXTextField fx:id="placaVehiculoMoto" layoutX="111.0" layoutY="214.0" prefHeight="25.0" prefWidth="139.0" />
                               <Label layoutX="18.0" layoutY="268.0" prefHeight="21.0" prefWidth="112.0" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: gray;" text="Tipo:" />
-                              <JFXRadioButton layoutX="165.0" layoutY="273.0" text="Residente" toggleGroup="$tipoVisitante" />
-                              <JFXRadioButton layoutX="166.0" layoutY="302.0" text="Visitante" toggleGroup="$tipoVisitante" />
+                              <JFXRadioButton fx:id="tipoResidenteMoto" layoutX="165.0" layoutY="273.0" text="Residente" toggleGroup="$tipoVisitante" />
+                              <JFXRadioButton fx:id="tipoVisitanteMoto" layoutX="166.0" layoutY="302.0" text="Visitante" toggleGroup="$tipoVisitante" />
                               <Label layoutX="17.0" layoutY="167.0" prefHeight="21.0" prefWidth="78.0" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: gray;" text="Cedula:" />
-                              <JFXTextField layoutX="109.0" layoutY="169.0" prefHeight="25.0" prefWidth="231.0" />
-                              <JFXButton buttonType="RAISED" layoutX="120.0" layoutY="381.0" prefHeight="57.0" prefWidth="165.0" ripplerFill="WHITE" style="-fx-background-color: gray;" text="Realizado">
+                              <JFXTextField fx:id="cedulaResidenteMoto" layoutX="109.0" layoutY="169.0" prefHeight="25.0" prefWidth="231.0" />
+                              <JFXButton fx:id="asignarParqueoIndvMoto" buttonType="RAISED" layoutX="134.0" layoutY="383.0" prefHeight="27.0" prefWidth="139.0" ripplerFill="WHITE" style="-fx-background-color: gray;" text="Asignar">
                                  <font>
                                     <Font size="21.0" />
                                  </font>
@@ -114,7 +114,7 @@
                         <Pane layoutX="435.0" layoutY="343.0" prefHeight="319.0" prefWidth="349.0" style="-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-color: white;">
                            <children>
                               <Label layoutX="14.0" layoutY="-1.0" prefHeight="91.0" prefWidth="210.0" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #7387A8;" text="Asignación aleatoria" />
-                              <JFXButton buttonType="RAISED" layoutX="92.0" layoutY="160.0" prefHeight="57.0" prefWidth="165.0" ripplerFill="#f8f8f8" style="-fx-background-color: gray;" text="Realizar sorteo">
+                              <JFXButton fx:id="sorteoAleatorioMoto" buttonType="RAISED" layoutX="92.0" layoutY="160.0" prefHeight="45.0" prefWidth="181.0" ripplerFill="#f8f8f8" style="-fx-background-color: gray;" text="Realizar sorteo">
                                  <font>
                                     <Font size="21.0" />
                                  </font>
@@ -126,17 +126,17 @@
                               <Label layoutX="14.0" layoutY="-1.0" prefHeight="91.0" prefWidth="210.0" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #7387A8;" text="Asignación actual" />
                               <JFXScrollPane layoutY="75.0" prefHeight="450.0" prefWidth="379.0">
                                  <children>
-                                    <JFXTreeTableView fx:id="transaccionesTabla1" prefHeight="379.0" prefWidth="830.0">
+                                    <JFXTreeTableView fx:id="tablaTotalAsignacionMoto" prefHeight="379.0" prefWidth="830.0">
                                        <columns>
-                                          <TreeTableColumn editable="false" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="# Parqueadero" />
-                                          <TreeTableColumn editable="false" maxWidth="279.0" minWidth="100.0" prefWidth="279.0" text="Residente asignado" />
+                                          <TreeTableColumn fx:id="numeroParqueoMoto" editable="false" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="# Parqueadero" />
+                                          <TreeTableColumn fx:id="tablaAsignacionesMoto" editable="false" maxWidth="279.0" minWidth="100.0" prefWidth="279.0" text="Residente asignado" />
                                        </columns>
                                     </JFXTreeTableView>
                                  </children>
                               </JFXScrollPane>
                            </children>
                         </Pane>
-                        <JFXTextField layoutX="435.0" layoutY="139.0" promptText="Buscar asignación..." />
+                        <JFXTextField fx:id="buscarAsignacionMoto" layoutX="523.0" layoutY="225.0" prefHeight="25.0" prefWidth="173.0" promptText="Buscar asignación..." />
                      </children>
                   </AnchorPane>
                </content>
