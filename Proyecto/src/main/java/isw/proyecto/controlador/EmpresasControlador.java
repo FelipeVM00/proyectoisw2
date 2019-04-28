@@ -5,6 +5,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 import java.net.URL;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -76,7 +77,6 @@ public class EmpresasControlador implements Initializable {
 	@FXML
 	private void nuevo(ActionEvent event) {
 		nombreTF.setText("");
-		//tipoEmpresaTF.setText("");
 		numeroContratoTF.setText("");
 		telefonoTF.setText("");
 		fechaInicioTF.setText("");
@@ -90,26 +90,26 @@ public class EmpresasControlador implements Initializable {
 	@FXML
 	private void aniadir(ActionEvent event) {
 		EmpresaContratada empresas = new EmpresaAseo();
-		empresas.nombre.set(nombreTF.getText());
-		//empresas.tipoEmpresa.set(tipoEmpresaTF.getText());
-		empresas.numeroContrato.set(numeroContratoTF.getText());
-		empresas.telefono.set(telefonoTF.getText());
-		empresas.fechaInicio.set(fechaInicioTF.getText());
-		empresas.fechaTerminacion.set(fechaTerminacionTF.getText());
-		empresas.valorContrato.set(valorContratoTF.getText());
+		empresas.setNombre(nombreTF.getText());
+		empresas.setTipoEmpresa(tipoEmpresaAseoRB.getText());
+		empresas.setNumeroContrato(numeroContratoTF.getText());
+		empresas.setTelefono(Integer.parseInt(telefonoTF.getText()));
+		empresas.setFechaInicio(fechaInicioTF.getText());
+		//empresas.setFechaTerminacion(fechaTerminacionTF.getText());
+		empresas.setValorContrato(Double.parseDouble(valorContratoTF.getText()));
 		contratos.add(empresas);
 	}
 
 	@FXML
 	private void modificar(ActionEvent event) {
 		EmpresaContratada empresas = new EmpresaAseo();
-		empresas.nombre.set(nombreTF.getText());
-		//empresas.tipoEmpresa.set(tipoEmpresaTF.getText());
-		empresas.numeroContrato.set(numeroContratoTF.getText());
-		empresas.telefono.set(telefonoTF.getText());
-		empresas.fechaInicio.set(fechaInicioTF.getText());
-		empresas.fechaTerminacion.set(fechaTerminacionTF.getText());
-		empresas.valorContrato.set(valorContratoTF.getText());
+		empresas.setNombre(nombreTF.getText());
+		empresas.setTipoEmpresa(tipoEmpresaAseoRB.getText());
+		empresas.setNumeroContrato(numeroContratoTF.getText());
+		empresas.setTelefono(Integer.parseInt(telefonoTF.getText()));
+		empresas.setFechaInicio(fechaInicioTF.getText());
+		empresas.setFechaTerminacion(fechaTerminacionTF.getText());
+		empresas.setValorContrato(Double.parseDouble(valorContratoTF.getText()));
 		contratos.set(posicionEmpresaEnTabla, empresas);
 	}
 
@@ -149,12 +149,12 @@ public class EmpresasControlador implements Initializable {
 
 			// Pongo los textFields con los datos correspondientes
 			nombreTF.setText(empresas.getNombre());
-			//tipoEmpresaTF.setText(empresas.getTipoEmpresa());
+			//tipo empresa
 			numeroContratoTF.setText(empresas.getNumeroContrato());
-			telefonoTF.setText(empresas.getTelefono());
-			fechaInicioTF.setText(empresas.getFechaInicio());
+			telefonoTF.setText(empresas.getTelefono().toString());
+			fechaInicioTF.setText(empresas.getFechaInicio().toString());
 			fechaTerminacionTF.setText(empresas.getFechaTerminacion());
-			valorContratoTF.setText(empresas.getValorContrato());
+			valorContratoTF.setText(empresas.getValorContrato().toString());
 
 			// Pongo los botones en su estado correspondiente
 			modificarBT.setDisable(false);
@@ -170,10 +170,8 @@ public class EmpresasControlador implements Initializable {
 		tipoEmpresaCL.setCellValueFactory(new PropertyValueFactory<EmpresaContratada, String>("tipo de empresa"));
 		numeroContratoCL.setCellValueFactory(new PropertyValueFactory<EmpresaContratada, String>("numero de contrato"));
 		telefonoCL.setCellValueFactory(new PropertyValueFactory<EmpresaContratada, String>("telefono"));
-		fechaInicioContratoCL.setCellValueFactory(
-				new PropertyValueFactory<EmpresaContratada, String>("fecha de inicio de contrato"));
-		fechaTerminacionContratoCL.setCellValueFactory(
-				new PropertyValueFactory<EmpresaContratada, String>("fecha de termino de contrato"));
+		fechaInicioContratoCL.setCellValueFactory(new PropertyValueFactory<EmpresaContratada, String>("fecha de inicio de contrato"));
+		fechaTerminacionContratoCL.setCellValueFactory(new PropertyValueFactory<EmpresaContratada, String>("fecha de termino de contrato"));
 		valorContratoCL.setCellValueFactory(new PropertyValueFactory<EmpresaContratada, String>("valor contrato"));
 
 		contratos = FXCollections.observableArrayList();
@@ -192,17 +190,19 @@ public class EmpresasControlador implements Initializable {
         eliminarBT.setDisable(true);
 
 		// Seleccionar las tuplas de la tabla de las empresas
-		final ObservableList<EmpresaContratada> tablaPersonaSel = tablaContratos.getSelectionModel().getSelectedItems();
-		tablaPersonaSel.addListener(selectorTablaEmpresas);
+		final ObservableList<EmpresaContratada> tablaContratosSel = tablaContratos.getSelectionModel().getSelectedItems();
+		tablaContratosSel.addListener(selectorTablaEmpresas);
 		
 		// Inicializamos la tabla con algunos datos aleatorios
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 5; i++) {
             EmpresaContratada c1 = new EmpresaAseo();
-            c1.nombre.set("Nombre empresa " + i);
-            c1.numeroContrato.set("abcd" + i);
-            c1.telefono.set("12345"+i);
-            c1.fechaInicio.set("12345"+i);
-            c1.fechaTerminacion.set("12345"+i);
+            c1.setNombre("Nombre empresa " + i);
+            //c1.setTipoEmpresa(tipoEmpresaAseoRB);
+            c1.setNumeroContrato("abcd" + i);
+            c1.setTelefono(12345 + i);
+            c1.setFechaInicio("31/12/2019");
+            c1.setFechaTerminacion("12345"+i);
+            c1.setValorContrato(2000000000);
             contratos.add(c1);
         }
 

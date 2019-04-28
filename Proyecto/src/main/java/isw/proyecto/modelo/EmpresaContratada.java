@@ -1,58 +1,147 @@
 package isw.proyecto.modelo;
 
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.control.RadioButton;
 
 public abstract class EmpresaContratada {
-	
-	public SimpleStringProperty nombre = new SimpleStringProperty();
-	public SimpleStringProperty tipoEmpresa = new SimpleStringProperty();
-	public SimpleStringProperty numeroContrato = new SimpleStringProperty();
-	public SimpleStringProperty telefono = new SimpleStringProperty();
-	public SimpleStringProperty fechaInicio = new SimpleStringProperty();
-	public SimpleStringProperty fechaTerminacion = new SimpleStringProperty();
-	public SimpleStringProperty valorContrato = new SimpleStringProperty();
+
+	public String nombre;
+	public String tipoEmpresa;
+	public String numeroContrato;
+	public int telefono;
+	public Date fechaInicio;
+	public String fechaTerminacion;
+	public double valorContrato;
 	public List<Empleado> empleados;
+
+	public EmpresaContratada() {
+	}
+
+	public EmpresaContratada(String nom, String tipoEmpresa, String numContrato, int telefono, Date fechaInicio, String fechaTerminacion,
+			double valorContrato) {
+		this.nombre = nom;
+		this.tipoEmpresa = tipoEmpresa;
+		this.numeroContrato = numContrato;
+		this.telefono = telefono;
+		this.fechaInicio = fechaInicio;
+		this.fechaTerminacion = fechaTerminacion;
+		this.valorContrato = valorContrato;
+	}
+
 	
+
 	public String getNombre() {
-		return nombre.get();
+		return nombre;
 	}
 	
-		public String getTipoEmpresa() {
-		return tipoEmpresa.get();
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
+	public String getTipoEmpresa() {
+		return tipoEmpresa;
+	}
+
+	public void setTipoEmpresa(String tipoEmpresaAseoRB) {
+		this.tipoEmpresa = tipoEmpresaAseoRB;
+	}
+	
 	public String getNumeroContrato() {
-		return numeroContrato.get();
+		return numeroContrato;
+	}	
+
+	public void setNumeroContrato(String numContrato) {
+		this.numeroContrato = numContrato;
+	}
+	
+	public Integer getTelefono() {
+		return telefono;
 	}
 
-	public String getTelefono() {
-		return telefono.get();
+	public void setTelefono(int telefono) {
+		this.telefono = telefono;
+	}
+	
+	public Date getFechaInicio() {
+		return fechaInicio;
 	}
 
-	public String getFechaInicio() {
-		return fechaInicio.get();
+	public void setFechaInicio(String fechaInicio) {
+		try {
+			this.fechaInicio = new SimpleDateFormat("dd/MM/yyyy").parse(fechaInicio);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public String getFechaTerminacion() {
-		return fechaTerminacion.get();
+		return fechaTerminacion;
 	}
 
-	public String getValorContrato() {
-		return valorContrato.get();
+	public void setFechaTerminacion(String fechaTerminacion) {
+		this.fechaTerminacion = fechaTerminacion;
 	}
 
-	
+	public Double getValorContrato() {
+		return valorContrato;
+	}
+
+	public void setValorContrato(double valorContrato) {
+		this.valorContrato = valorContrato;
+	}
+
 	public List<Empleado> getEmpleados() {
 		return empleados;
 	}
-	
+
 	public void setEmpleados(List<Empleado> empleados) {
 		this.empleados = empleados;
 	}
+
+
+	public SimpleStringProperty nombreProperty() {
+		SimpleStringProperty str = new SimpleStringProperty(nombre);
+		return str;
+	}
+	
+	public SimpleStringProperty tipoEmpresaProperty() {
+		SimpleStringProperty str = new SimpleStringProperty(tipoEmpresa);
+		return str;
+	}
+
+	public SimpleStringProperty numeroContratoProperty() {
+		SimpleStringProperty str = new SimpleStringProperty(numeroContrato);
+		return str;
+	}
+	
+	public SimpleIntegerProperty telefonoProperty() {
+		SimpleIntegerProperty str = new SimpleIntegerProperty(telefono);
+		return str;
+	}
+	
+	public SimpleStringProperty fechaInicioProperty() {
+		SimpleStringProperty str = new SimpleStringProperty(fechaInicio.toString());
+		return str;
+	}
+	
+	public SimpleStringProperty fechaTerminacionProperty() {
+		SimpleStringProperty str = new SimpleStringProperty(fechaTerminacion);
+		return str;
+	}
+	
+	public SimpleDoubleProperty valorContratoProperty() {
+		SimpleDoubleProperty str = new SimpleDoubleProperty(valorContrato);
+		return str;
+	}
+	
 	
 }
