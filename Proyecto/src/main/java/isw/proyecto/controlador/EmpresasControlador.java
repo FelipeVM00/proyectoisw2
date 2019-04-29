@@ -2,16 +2,18 @@ package isw.proyecto.controlador;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 
 import java.net.URL;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXDatePicker;
 
 import isw.proyecto.modelo.*;
 import javafx.collections.FXCollections;
@@ -50,8 +52,6 @@ public class EmpresasControlador implements Initializable {
 	@FXML
 	private TextField telefonoTF;
 	@FXML
-	private TextField fechaTerminacionTF;
-	@FXML
 	private TextField valorContratoTF;
 	@FXML
 	private JFXTextField campoBusqueda;
@@ -60,7 +60,10 @@ public class EmpresasControlador implements Initializable {
 	 * declarando DatePicker
 	 */
 	@FXML
-	private DatePicker fechaInicioDP;
+	private JFXDatePicker fechaInicioDP;
+
+	@FXML
+	private JFXDatePicker fechaTerminacionDP;
 
 	/**
 	 * declarando radio buttons
@@ -106,7 +109,7 @@ public class EmpresasControlador implements Initializable {
 		numeroContratoTF.setText("");
 		telefonoTF.setText("");
 		fechaInicioDP.setValue(null);
-		fechaTerminacionTF.setText("");
+		fechaTerminacionDP.setValue(null);
 		valorContratoTF.setText("");
 		modificarBT.setDisable(true);
 		eliminarBT.setDisable(true);
@@ -130,7 +133,6 @@ public class EmpresasControlador implements Initializable {
 	@FXML
 	private void aniadir(ActionEvent event) {
 		if (nombreTF.getText().isEmpty() || numeroContratoTF.getText().isEmpty() || telefonoTF.getText().isEmpty()
-				 || fechaTerminacionTF.getText().isEmpty()
 				|| valorContratoTF.getText().isEmpty()) {
 			mostrarAlerta("Informacion Incompleta", "Por favor termine de rellenar todos los campos");
 		} else {
@@ -139,10 +141,12 @@ public class EmpresasControlador implements Initializable {
 			empresas.setTipoEmpresa(tipoEmpresaAseoRB.getText());
 			empresas.setNumeroContrato(numeroContratoTF.getText());
 			empresas.setTelefono(Integer.parseInt(telefonoTF.getText()));
-			empresas.setFechaInicio(fechaInicioDP);
-			empresas.setFechaTerminacion(fechaTerminacionTF.getText());
+			empresas.setFechaInicio(
+					fechaInicioDP.getValue().format(DateTimeFormatter.ofPattern("d/MM/yyyy")).toString());
+			empresas.setFechaTerminacion(
+					fechaTerminacionDP.getValue().format(DateTimeFormatter.ofPattern("d/MM/yyyy")).toString());
 			empresas.setValorContrato(Double.parseDouble(valorContratoTF.getText()));
-			
+
 			contratos.add(empresas);
 		}
 
@@ -160,8 +164,9 @@ public class EmpresasControlador implements Initializable {
 		empresas.setTipoEmpresa(tipoEmpresaAseoRB.getText());
 		empresas.setNumeroContrato(numeroContratoTF.getText());
 		empresas.setTelefono(Integer.parseInt(telefonoTF.getText()));
-		empresas.setFechaInicio(fechaInicioDP);
-		empresas.setFechaTerminacion(fechaTerminacionTF.getText());
+		empresas.setFechaInicio(fechaInicioDP.getValue().format(DateTimeFormatter.ofPattern("d/MM/yyyy")).toString());
+		empresas.setFechaTerminacion(
+				fechaTerminacionDP.getValue().format(DateTimeFormatter.ofPattern("d/MM/yyyy")).toString());
 		empresas.setValorContrato(Double.parseDouble(valorContratoTF.getText()));
 		contratos.set(posicionEmpresaEnTabla, empresas);
 	}
@@ -217,8 +222,8 @@ public class EmpresasControlador implements Initializable {
 			// tipo empresa
 			numeroContratoTF.setText(empresas.getNumeroContrato());
 			telefonoTF.setText(empresas.getTelefono().toString());
-			fechaInicioDP.setChronology(empresas.getFechaInicio().getChronology());
-			fechaTerminacionTF.setText(empresas.getFechaTerminacion());
+			fechaInicioDP.setValue(empresas.getFechaInicio());
+			fechaTerminacionDP.setValue(empresas.getFechaTerminacion());
 			valorContratoTF.setText(empresas.getValorContrato().toString());
 
 			/**
@@ -235,7 +240,7 @@ public class EmpresasControlador implements Initializable {
 	 */
 
 	private void inicializarTablaContratos() {
-		nombreCL.setCellValueFactory(new PropertyValueFactory<EmpresaContratada, String>("nombre"));
+		nombreCL.setCellValueFactory(cell -> cell.getValue().nombreProperty());
 		tipoEmpresaCL.setCellValueFactory(new PropertyValueFactory<EmpresaContratada, String>("tipo de empresa"));
 		numeroContratoCL.setCellValueFactory(new PropertyValueFactory<EmpresaContratada, String>("numero de contrato"));
 		telefonoCL.setCellValueFactory(new PropertyValueFactory<EmpresaContratada, String>("telefono"));
@@ -273,17 +278,17 @@ public class EmpresasControlador implements Initializable {
 		/**
 		 * Inicializamos la tabla con algunos datos aleatorios
 		 */
-		for (int i = 0; i < 5; i++) {
+/*		for (int i = 0; i < 5; i++) {
 			EmpresaContratada c1 = new EmpresaAseo();
 			c1.setNombre("Nombre empresa " + i);
 			c1.setTipoEmpresa("tipoEmpresaAseoRB");
 			c1.setNumeroContrato("abcd" + i);
 			c1.setTelefono(12345 + i);
-			c1.setFechaInicio(fechaInicioDP);
-			c1.setFechaTerminacion("12345" + i);
+			c1.setFechaInicio(fechaInicioDP.getValue().format(DateTimeFormatter.ofPattern("d/MM/yyyy")).toString());
+			c1.setFechaTerminacion(fechaInicioDP.getValue().format(DateTimeFormatter.ofPattern("d/MM/yyyy")).toString());
 			c1.setValorContrato(2000000);
 			contratos.add(c1);
-		}
+		}*/
 		FilteredList<EmpresaContratada> datosFiltrados = new FilteredList<>(contratos, p -> true);
 		campoBusqueda.textProperty().addListener((observable, oldValue, newValue) -> {
 			datosFiltrados.setPredicate(contratoo -> {
@@ -307,7 +312,6 @@ public class EmpresasControlador implements Initializable {
 		numeroContratoCL.setCellValueFactory(cell -> cell.getValue().numeroContratoProperty());
 		fechaInicioContratoCL.setCellValueFactory(cell -> cell.getValue().fechaInicioProperty());
 		fechaTerminacionContratoCL.setCellValueFactory(cell -> cell.getValue().fechaTerminacionProperty());
-		//valorContratoCL.setCellValueFactory(cell -> cell.getValue().valorContratoProperty());
 	}
 
 }

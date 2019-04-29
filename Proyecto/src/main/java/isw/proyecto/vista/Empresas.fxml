@@ -90,7 +90,6 @@
                                     <TextField fx:id="nombreTF" layoutX="34.0" layoutY="62.0" prefHeight="25.0" prefWidth="313.0" />
                                     <TextField fx:id="numeroContratoTF" layoutX="36.0" layoutY="168.0" prefHeight="25.0" prefWidth="310.0" />
                                     <TextField fx:id="telefonoTF" layoutX="36.0" layoutY="226.0" prefHeight="25.0" prefWidth="310.0" />
-                                    <TextField fx:id="fechaTerminacionTF" layoutX="36.0" layoutY="333.0" prefHeight="25.0" prefWidth="310.0" />
                                     <TextField fx:id="valorContratoTF" layoutX="38.0" layoutY="387.0" prefHeight="25.0" prefWidth="310.0" />
                                     <Button fx:id="aniadirBT" layoutX="36.0" layoutY="425.0" mnemonicParsing="false" onAction="#aniadir" prefHeight="25.0" prefWidth="310.0" text="AÑADIR">
                                        <font>
@@ -119,6 +118,7 @@
                                     <JFXRadioButton fx:id="tipoEmpresaMantenimientoRB" layoutX="110.0" layoutY="121.0" text="Mantenimiento" toggleGroup="$tipoEmpresa" />
                                     <JFXRadioButton fx:id="tipoEmpresaVigilanciaRB" layoutX="231.0" layoutY="121.0" text="Vigilancia" toggleGroup="$tipoEmpresa" />
                                     <JFXDatePicker fx:id="fechaInicioDP" defaultColor="BLACK" layoutX="34.0" layoutY="283.0" prefHeight="25.0" prefWidth="310.0" />
+                                    <JFXDatePicker fx:id="fechaTerminacionDP" defaultColor="BLACK" layoutX="38.0" layoutY="341.0" prefHeight="25.0" prefWidth="306.0" />
                                  </children>
                               </AnchorPane>
                           </items>

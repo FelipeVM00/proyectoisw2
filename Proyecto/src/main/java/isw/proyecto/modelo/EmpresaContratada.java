@@ -1,14 +1,11 @@
 package isw.proyecto.modelo;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.scene.control.DatePicker;
 
 public abstract class EmpresaContratada {
 
@@ -16,22 +13,22 @@ public abstract class EmpresaContratada {
 	public String tipoEmpresa;
 	public String numeroContrato;
 	public int telefono;
-	public DatePicker fechaInicio;
-	public String fechaTerminacion;
+	public LocalDate fechaInicio;
+	public LocalDate fechaTerminacion;
 	public double valorContrato;
 	public List<Empleado> empleados;
 
 	public EmpresaContratada() {
 	}
 
-	public EmpresaContratada(String nom, String tipoEmpresa, String numContrato, int telefono, DatePicker fechaInicio, String fechaTerminacion,
+	public EmpresaContratada(String nom, String tipoEmpresa, String numContrato, int telefono, String fecha,
 			double valorContrato) {
 		this.nombre = nom;
 		this.tipoEmpresa = tipoEmpresa;
 		this.numeroContrato = numContrato;
 		this.telefono = telefono;
-		this.fechaInicio = fechaInicio;
-		this.fechaTerminacion = fechaTerminacion;
+		this.setFechaInicio(fecha);
+		this.setFechaTerminacion(fecha);
 		this.valorContrato = valorContrato;
 	}
 
@@ -69,20 +66,20 @@ public abstract class EmpresaContratada {
 		this.telefono = telefono;
 	}
 	
-	public DatePicker getFechaInicio() {
+	public LocalDate getFechaInicio() {
 		return fechaInicio;
 	}
 
-	public void setFechaInicio(DatePicker fechaInicio) {
-		this.fechaInicio = fechaInicio;
+	public void setFechaInicio(String fechaInicio) {
+		this.fechaInicio = LocalDate.parse(fechaInicio, DateTimeFormatter.ofPattern("d/MM/yyyy"));
 	}
 
-	public String getFechaTerminacion() {
+	public LocalDate getFechaTerminacion() {
 		return fechaTerminacion;
 	}
 
 	public void setFechaTerminacion(String fechaTerminacion) {
-		this.fechaTerminacion = fechaTerminacion;
+		this.fechaTerminacion = LocalDate.parse(fechaTerminacion, DateTimeFormatter.ofPattern("d/MM/yyyy"));
 	}
 
 	public Double getValorContrato() {
@@ -128,7 +125,7 @@ public abstract class EmpresaContratada {
 	}
 	
 	public SimpleStringProperty fechaTerminacionProperty() {
-		SimpleStringProperty str = new SimpleStringProperty(fechaTerminacion);
+		SimpleStringProperty str = new SimpleStringProperty(fechaTerminacion.toString());
 		return str;
 	}
 	
