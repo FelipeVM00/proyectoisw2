@@ -37,95 +37,195 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.Pane;
 import javafx.stage.StageStyle;
 
+/*
+ * Esta clase es el controlador de la vista Finanzas.
+ */
 public class FinanzasControlador implements Initializable{
 	
+	/*
+	 * Panel principal de pestañas.
+	 */
 	@FXML
     private JFXTabPane pestañasPane;
 
+	/*
+	 * Texto de fondos editable.
+	 */
     @FXML
     private Label fondosLabel;
 
+    /*
+     * Tabla de las transacciones de la cuenta de la zona residencial.
+     */
     @FXML
     private TableView<Pago> tablaTransacciones;
 
+    /*
+     * Columna de fecha en la tabla de transacciones.
+     */
     @FXML
     private TableColumn<Pago, String> columnaFecha;
 
+    /*
+     * Columna de descripcion en la tabla de transacciones.
+     */
     @FXML
     private TableColumn<Pago, String> columnaDescripcion;
 
+    /*
+     * Columna de monto en la tabla de transacciones.
+     */
     @FXML
     private TableColumn<Pago, String> columnaMonto;
 
+    /*
+     * Tabla de pagos de administración.
+     */
     @FXML
     private TableView<Pago> tablaPagos;
 
+    /*
+     * Columna de id en la tabla de pagos.
+     */
     @FXML
     private TableColumn<Pago, String> columnaID;
 
+    /*
+     * Columna de mes en la tabla de pagos.
+     */
     @FXML
     private TableColumn<Pago, String> columnaMes;
 
+    /*
+     * Columna de valor en la tabla de pagos.
+     */
     @FXML
     private TableColumn<Pago, String> columnaValor;
 
+    /*
+     * Columna de residente en la tabla de pagos.
+     */
     @FXML
     private TableColumn<Pago, String> columnaResidente;
 
+    /*
+     * Campo para buscar un residente en la tabla de pagos.
+     */
     @FXML
     private JFXTextField campoBusqueda;
     
+    /*
+     * Campo para ingresar el nombre del residente.
+     */
     @FXML
     private JFXTextField campoNombre;
 
+    /*
+     * Campo para ingresar el mes a pagar.
+     */
     @FXML
     private JFXTextField campoMesAPagar;
 
+    /*
+     * DatePicker para elegir la fecha del pago
+     */
     @FXML
     private JFXDatePicker campoFecha;
 
+    /*
+     * Campo para ingresar el valor del pago.
+     */
     @FXML
     private JFXTextField campoValorPago;
 
+    /*
+     * Boton para agregar una multa al pago.
+     */
     @FXML
     private JFXButton btnMulta;
 
+    /*
+     * Boton para agregar un descuento al pago.
+     */
     @FXML
     private JFXButton btnDescuento;
 
+    /*
+     * Boton para agregar un recargo al pago.
+     */
     @FXML
     private JFXButton btnRecargo;
 
+    /*
+     * Campo para ingresar el valor a añadir al pago.
+     */
     @FXML
     private JFXTextField campoValor;
 
+    /*
+     * Texto del tipo de decorador.
+     */
     @FXML
     private Label textoValorA;
 
+    /*
+     * Campo para ingresar los detalles de la multa, descuento o recargo.
+     */
     @FXML
     private JFXTextArea campoDetalles;
 
+    /*
+     * Boton para confirmar la multa, descuento o recargo.
+     */
     @FXML
     private JFXButton btnOk;
     
+    /*
+     * Boton para confirmar que se recibe un pago y guardarlo en la base de datos.
+     */
     @FXML
     private JFXButton btnRecibir;
     
+    /*
+     * Panel para añadir una multa, descuento o recargo.
+     */
     @FXML
     private Pane paneAñadir;
     
+    /*
+     * Lista de pagos para añadir a la vista de la tabla.
+     */
     private ObservableList<Pago> pagos = FXCollections.observableArrayList();
        
+    /*
+     * Lista de nombres de residentes para autocompletar en la busqueda.
+     */
     private List<String> nombresResidentes = new ArrayList<String>();
     
+    /*
+     * Lista de meses para autocompletar en su ingreso.
+     */
     private String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
     
+    /*
+     * Variable de tipo PagoAdministracion para poder recibir un pago.
+     */
     private PagoAdministracion pago;
     
+    /*
+     * Variable para almacenar la implementacion del patron decorator.
+     */
     private PagoDecorator decorador = null;
     
+    /*
+     * Variable para realizar la conexión a la base de datos.
+     */
     private PagoDAOImpl pagoDAO = new PagoDAOImpl();
 
+    /*
+     * Se inicializan los principales componentes de la vista.
+     * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+     */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {	
 		cambiarEstilo();
@@ -137,14 +237,23 @@ public class FinanzasControlador implements Initializable{
 		llenarTablaPagos();	
 	}
 
+	/*
+	 * Metodo para cambiar el estilo de la vista añadiendole el archivo custom.css.
+	 */
 	private void cambiarEstilo() {
 		pestañasPane.getStylesheets().add("/isw/proyecto/vista/custom.css");
 	}
 	
+	/*
+	 * Metodo para rellenar la tabla de pagos haciendo la consulta a la base de datos.
+	 */
 	private void llenarTablaPagos() {
 		pagos.addAll(pagoDAO.leerTodo());
 	}
 	
+	/*
+	 * Metodo para inicializar los buscadores de nombres para su autocompletacion
+	 */
 	private void inicializarBuscador() {
 		
 		for(Pago p : tablaPagos.getItems()) {
@@ -169,7 +278,9 @@ public class FinanzasControlador implements Initializable{
 		datosOrdenados.comparatorProperty().bind(tablaPagos.comparatorProperty());
 		tablaPagos.setItems(datosOrdenados);
 	}
-	
+	/*
+	 * Metodo para inicializar las columnas de la tabla de pagos.
+	 */
 	private void inicializarColumnas() {
 		columnaID.setCellValueFactory(cell -> cell.getValue().idProperty());
 		columnaMes.setCellValueFactory(cell -> cell.getValue().mesAPagarProperty());
@@ -178,6 +289,12 @@ public class FinanzasControlador implements Initializable{
 		columnaResidente.setCellValueFactory(cell -> cell.getValue().residenteProperty());
 	}
 	
+	/*
+	 * Metodo de utilidad para mostrar una alerta en pantalla.
+	 * @param titulo titulo de la alerta.
+	 * @param msg mensaje de la alerta.
+	 * @param tipo tipo de alerta.
+	 */
 	public static void mostrarAlerta(String titulo, String msg, Alert.AlertType tipo) {
         Alert alerta = new Alert(tipo);
         alerta.initStyle(StageStyle.UTILITY);
@@ -187,6 +304,9 @@ public class FinanzasControlador implements Initializable{
         alerta.showAndWait();
     }
 	
+	/*
+	 * Metodo que escucha cuando se hace click en el boton de descuento.
+	 */
 	@FXML
 	void clickBtnDescuento(ActionEvent event) {
 		paneAñadir.setVisible(true);
@@ -198,6 +318,9 @@ public class FinanzasControlador implements Initializable{
 		textoValorA.setText("Valor descuento:");
 	}	  
 
+	/*
+	 * Metodo que escucha cuando se hace click en el boton de multa.
+	 */
 	@FXML
 	void clickBtnMulta(ActionEvent event) {
 		paneAñadir.setVisible(true);
@@ -209,6 +332,9 @@ public class FinanzasControlador implements Initializable{
 		textoValorA.setText("Valor multa:");
 	}
 
+    /*
+     * Metodo que escucha cuando se hace click en el boton de recargo.
+     */
 	@FXML
 	void clickBtnRecargo(ActionEvent event) {
 		paneAñadir.setVisible(true);
@@ -220,6 +346,9 @@ public class FinanzasControlador implements Initializable{
 		textoValorA.setText("Valor recargo:");		
 	}    
 	
+	/*
+	 * Metodo que escucha cuando se hace click en el boton de OK.
+	 */
     @FXML
     void clickBtnOk(ActionEvent event) {
     	mostrarAlerta("Operación exitosa !!!", "El valor se añadió satisfactoriamente", Alert.AlertType.INFORMATION);  	
@@ -239,6 +368,9 @@ public class FinanzasControlador implements Initializable{
     	btnRecibir.setVisible(true);
     }
     
+    /*
+     * Metodo que escucha cuando se hace click en el boton de recibir pago.
+     */
     @FXML
     void clickBtnRecibir(ActionEvent event) {
     	if(validarInfo()) {  		
@@ -253,6 +385,10 @@ public class FinanzasControlador implements Initializable{
     	}
     }
     
+    /*
+     * Metodo para validar que la informacion ingresada en los campos sea correcta
+     * @return Si es valida o no
+     */
     private boolean validarInfo() {
     	String nombre = campoNombre.getText().replaceAll("\\s*$","");
     	if(!ExpresionesUtil.tieneSoloLetras(nombre)) {

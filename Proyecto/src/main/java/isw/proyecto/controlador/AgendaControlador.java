@@ -21,20 +21,36 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 
+/*
+ * Esta clase es el controlador de la vista Agenda.
+ */
 public class AgendaControlador implements Initializable{
 
+	/*
+	 * Panel principal de la ventana.
+	 */
 	@FXML
 	private AnchorPane anchorpane;
 
+	/*
+	 * Inicializa la agenda.
+	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		inicializarAgenda();	
 	}
 	
+	/*
+	 * Metodo para incializar la agenda.
+	 */
 	private void inicializarAgenda() {
 		anchorpane.getChildren().add(crearCalendarios());
 	}
 	
+	/*
+	 * Metodo para crear unos calendarios por defecto.
+	 */
 	private CalendarView crearCalendarios() {
 		CalendarView calendarView = new CalendarView(); 
         Calendar asambleas = new Calendar("Asambleas"); 
