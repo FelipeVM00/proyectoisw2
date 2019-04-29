@@ -1,5 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="713.0" prefWidth="1219.0" stylesheets="@custom.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" />
+
+<AnchorPane id="AnchorPane" prefHeight="713.0" prefWidth="1219.0" stylesheets="@custom.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="isw.proyecto.controlador.ReportesControlador">
+   <children>
+      <Pane layoutX="376.0" layoutY="30.0" prefHeight="89.0" prefWidth="468.0" style="-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-color: white;">
+         <children>
+            <Label layoutX="35.0" layoutY="-1.0" prefHeight="91.0" prefWidth="395.0" style="-fx-font-size: 30; -fx-font-weight: bold; -fx-text-fill: #7387A8;" text="GENERACIÓN DE REPORTES" />
+         </children>
+      </Pane>
+      <Pane layoutX="14.0" layoutY="147.0" prefHeight="549.0" prefWidth="468.0" style="-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-color: white;">
+         <children>
+            <Label layoutX="92.0" layoutY="14.0" prefHeight="42.0" prefWidth="284.0" style="-fx-font-size: 30; -fx-font-weight: bold; -fx-text-fill: #7387A8;" text="Reportes generales" />
+            <JFXButton fx:id="btnReportePagos" layoutX="130.0" layoutY="80.0" onAction="#cllickBtnReportePagos" prefHeight="30.0" prefWidth="208.0" style="-fx-background-color: gray;" text="Generar reporte de pagos" textFill="WHITE">
+               <font>
+                  <Font name="Roboto Medium" size="14.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="btnReporteEmpresas" layoutX="130.0" layoutY="124.0" onAction="#cllickBtnReporteEmpresas" prefHeight="30.0" prefWidth="208.0" style="-fx-background-color: gray;" text="Generar reporte de empresas" textFill="WHITE">
+               <font>
+                  <Font name="Roboto Medium" size="14.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="btnReporteParqueaderos" layoutX="120.0" layoutY="169.0" onAction="#cllickBtnReporteParqueaderos" prefHeight="30.0" prefWidth="228.0" style="-fx-background-color: gray;" text="Generar reporte de parqueaderos" textFill="WHITE">
+               <font>
+                  <Font name="Roboto Medium" size="14.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="btnReporteResidentes" layoutX="130.0" layoutY="214.0" onAction="#cllickBtnReporteResidentes" prefHeight="30.0" prefWidth="208.0" style="-fx-background-color: gray;" text="Generar reporte de residentes" textFill="WHITE">
+               <font>
+                  <Font name="Roboto Medium" size="14.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="btnReporteVisitantes" layoutX="130.0" layoutY="260.0" onAction="#cllickBtnReporteVisitantes" prefHeight="30.0" prefWidth="208.0" style="-fx-background-color: gray;" text="Generar reporte de visitantes" textFill="WHITE">
+               <font>
+                  <Font name="Roboto Medium" size="14.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </Pane>
+      <Pane layoutX="498.0" layoutY="147.0" prefHeight="549.0" prefWidth="702.0" style="-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-color: white;">
+         <children>
+            <Label layoutX="209.0" layoutY="14.0" prefHeight="42.0" prefWidth="284.0" style="-fx-font-size: 30; -fx-font-weight: bold; -fx-text-fill: #7387A8;" text="Reportes especiales" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

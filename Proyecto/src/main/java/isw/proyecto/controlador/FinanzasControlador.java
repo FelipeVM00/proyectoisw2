@@ -15,6 +15,8 @@ import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 
 import isw.proyecto.modelo.Residente;
+import isw.proyecto.modelo.dao.PagoDAO;
+import isw.proyecto.modelo.dao.impl.DAOFactory;
 import isw.proyecto.modelo.dao.impl.PagoDAOImpl;
 import isw.proyecto.modelo.decorator.impl.pago.Pago;
 import isw.proyecto.modelo.decorator.impl.pago.PagoAdministracion;
@@ -220,7 +222,7 @@ public class FinanzasControlador implements Initializable{
     /*
      * Variable para realizar la conexión a la base de datos.
      */
-    private PagoDAOImpl pagoDAO = new PagoDAOImpl();
+    private PagoDAO pagoDAO = DAOFactory.getPagoDAO();
 
     /*
      * Se inicializan los principales componentes de la vista.

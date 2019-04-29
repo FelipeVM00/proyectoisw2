@@ -9,7 +9,9 @@ import isw.proyecto.modelo.dao.CuentaDAO;
 import isw.proyecto.modelo.dao.EmpleadoDAO;
 import isw.proyecto.modelo.dao.EmpresaDAO;
 import isw.proyecto.modelo.dao.LoginDAO;
+import isw.proyecto.modelo.dao.PagoDAO;
 import isw.proyecto.modelo.dao.ParqueaderoDAO;
+import isw.proyecto.modelo.dao.ReporteDAO;
 import isw.proyecto.modelo.dao.ResidenteDAO;
 import isw.proyecto.modelo.dao.UsuarioDAO;
 import isw.proyecto.modelo.dao.VisitanteDAO;
@@ -76,5 +78,13 @@ public abstract class DAOFactory {
 	
 	public static ZonaResidencialDAO getZonaResidencialDAO() {
 		return new ZonaResidencialDAOImpl();
+	}
+	
+	public static PagoDAO getPagoDAO() {
+		return new PagoDAOImpl();
+	}
+	
+	public static ReporteDAO getReporteDAO() {
+		return new ReporteDAOImpl();
 	}
 }

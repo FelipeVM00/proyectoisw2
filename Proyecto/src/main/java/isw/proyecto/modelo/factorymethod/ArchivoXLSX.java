@@ -1,5 +1,9 @@
 package isw.proyecto.modelo.factorymethod;
 
+import java.io.IOException;
+
+import javafx.collections.ObservableList;
+
 public class ArchivoXLSX implements IReporte{
 	
 	public ArchivoXLSX() {
@@ -7,7 +11,8 @@ public class ArchivoXLSX implements IReporte{
 	}
 
 	@Override
-	public void generarReporte() {
+	public <T> void generarReporte(String nombreArchivo, ObservableList<T> lista) throws IOException {
+		// TODO Auto-generated method stub
 		
 	}
 

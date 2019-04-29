@@ -176,4 +176,14 @@ public abstract class Pago implements IPago{
 		SimpleStringProperty str = new SimpleStringProperty(residente.getNombre() + " " + residente.getApellido());
 		return str;
 	}
+	
+	@Override
+	public String toString() {
+		return "Pago{ " + "identificación: " 
+				+ id + " Valor del pago: " 
+				+ valorPago + " Fecha del pago: " 
+				+ fechaPago + " Mes del pago: " + mesAPagar 
+				+ " Residente que pagó: " 
+				+ residente.getNombre() + " " 				+ residente.getApellido();	
+	}
 }
