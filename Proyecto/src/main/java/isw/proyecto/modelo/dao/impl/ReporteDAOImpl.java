@@ -7,8 +7,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import isw.proyecto.modelo.EmpresaAseo;
 import isw.proyecto.modelo.EmpresaContratada;
+import isw.proyecto.modelo.EmpresaMantenimiento;
+import isw.proyecto.modelo.EmpresaVigilancia;
 import isw.proyecto.modelo.Parqueadero;
+import isw.proyecto.modelo.ParqueaderoDeCarro;
 import isw.proyecto.modelo.Residente;
 import isw.proyecto.modelo.Visitante;
 import isw.proyecto.modelo.bridge.IAlgoritmoEncript;
@@ -25,7 +29,11 @@ public class ReporteDAOImpl implements ReporteDAO, IEncriptador{
 
 	private IAlgoritmoEncript algoritmoEncript;
 
-	private static final String SQL_READALL = "SELECT * FROM pagos";
+	private static final String SQL_READALL_PAGOS = "SELECT * FROM pagos";
+	
+	private static final String SQL_READALL_PARQUEADEROS = "SELECT * FROM parqueaderos";
+	
+	private static final String SQL_READALL_EMPRESAS = "SELECT * FROM empresas";
 	
 	private IDBAdapter dbAdapter = DBFactory.getDBadapter(DBType.MySQL);
 	
@@ -39,7 +47,7 @@ public class ReporteDAOImpl implements ReporteDAO, IEncriptador{
 		ArrayList<Pago> pagos = new ArrayList<Pago>();
 		String nombre[];
 		try {
-			ps = conn.prepareStatement(SQL_READALL);
+			ps = conn.prepareStatement(SQL_READALL_PAGOS);
 			res = ps.executeQuery();
 					
 			while(res.next()) {
@@ -65,8 +73,55 @@ public class ReporteDAOImpl implements ReporteDAO, IEncriptador{
 
 	@Override
 	public List<EmpresaContratada> leerEmpresas() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		conn = dbAdapter.getConnection();
+		PreparedStatement ps;
+		ResultSet res;
+		ArrayList<EmpresaContratada> empresas = new ArrayList<EmpresaContratada>();
+		try {
+			ps = conn.prepareStatement(SQL_READALL_EMPRESAS);
+			res = ps.executeQuery();
+					
+			while(res.next()) {
+				if(res.getString(2).contains("Aseo")) {
+					
+					empresas.add(new EmpresaAseo(res.getString(1),
+							res.getString(2),
+							res.getString(3),
+							Integer.valueOf(res.getString(4)),
+							res.getString(5),
+							Double.valueOf(res.getString(7))));
+							
+				}else if(res.getString(2).contains("Vigilancia")){
+					
+					empresas.add(new EmpresaVigilancia(res.getString(1),
+							res.getString(2),
+							res.getString(3),
+							Integer.valueOf(res.getString(4)),
+							res.getString(5),
+							Double.valueOf(res.getString(7))));
+				}else if(res.getString(2).contains("Mantenimiento")) {
+					
+					empresas.add(new EmpresaMantenimiento(res.getString(1),
+							res.getString(2),
+							res.getString(3),
+							Integer.valueOf(res.getString(4)),
+							res.getString(5),
+							Double.valueOf(res.getString(7))));
+				}
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return empresas;
 	}
 
 	@Override
@@ -83,8 +138,35 @@ public class ReporteDAOImpl implements ReporteDAO, IEncriptador{
 
 	@Override
 	public List<Parqueadero> leerParqueaderos() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		conn = dbAdapter.getConnection();
+		PreparedStatement ps;
+		ResultSet res;
+		ArrayList<Parqueadero> parqueaderos = new ArrayList<Parqueadero>();
+		String nombre[];
+		try {
+			ps = conn.prepareStatement(SQL_READALL_PARQUEADEROS);
+			res = ps.executeQuery();
+					
+			while(res.next()) {
+				nombre= res.getString(3).split(" ");
+				parqueaderos.add(new ParqueaderoDeCarro(Integer.valueOf(res.getString(1)), 
+						(Residente) new Residente.ResidenteBuilder().setNombre(res.getString(3)).build(),
+						null, 
+						res.getString(5)));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return parqueaderos;
 	}
 
 	@Override

@@ -8,7 +8,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import isw.proyecto.modelo.EmpresaAseo;
 import isw.proyecto.modelo.EmpresaContratada;
+import isw.proyecto.modelo.EmpresaMantenimiento;
+import isw.proyecto.modelo.EmpresaVigilancia;
 import isw.proyecto.modelo.Residente;
 import isw.proyecto.modelo.bridge.IAlgoritmoEncript;
 import isw.proyecto.modelo.bridge.IEncriptador;
@@ -24,9 +27,9 @@ public class EmpresaDAOImpl implements EmpresaDAO, IEncriptador {
 	private IAlgoritmoEncript algoritmoEncript;
 
 	private static final String SQL_INSERT = "INSERT INTO empresas (nombre, tipoEmpresa, numeroContrato, telefono, fechaInicio, fechaTerminacion, valorContrato) VALUES (?, ?, ?, ?, ?, ?, ?)";
-	private static final String SQL_DELETE = "DELETE FROM empresas WHERE id = ?";
-	private static final String SQL_UPDATE = "UPDATE empresas SET nombre = ?, tipoEmpresa = ?, numeroContrato = ?, telefono = ?, fechaInicio = ?, fechaTerminacion = ?, valorContrato = ? WHERE id = ?";
-	private static final String SQL_READ = "SELECT * FROM empresas WHERE id = ?";
+	private static final String SQL_DELETE = "DELETE FROM empresas WHERE numeroContrato = ?";
+	private static final String SQL_UPDATE = "UPDATE empresas SET nombre = ?, tipoEmpresa = ?, numeroContrato = ?, telefono = ?, fechaInicio = ?, fechaTerminacion = ?, valorContrato = ? WHERE numeroContrato = ?";
+	private static final String SQL_READ = "SELECT * FROM empresas WHERE numeroContrato = ?";
 	private static final String SQL_READALL = "SELECT * FROM empresas";
 
 	private IDBAdapter dbAdapter = DBFactory.getDBadapter(DBType.MySQL);
@@ -66,8 +69,56 @@ public class EmpresaDAOImpl implements EmpresaDAO, IEncriptador {
 
 	@Override
 	public EmpresaContratada leer(EmpresaContratada key) {
-		// TODO Auto-generated method stub
-		return null;
+		conn = dbAdapter.getConnection();
+		PreparedStatement ps;
+		ResultSet res;
+		EmpresaContratada empresaContratada = null;
+		try {
+			ps = conn.prepareStatement(SQL_READ);
+			
+			ps.setString(1, key.getNumeroContrato());
+			
+			res = ps.executeQuery();
+			
+			while(res.next()) {
+				if(res.getString(2).contains("Aseo")) {
+					
+					empresaContratada = new EmpresaAseo(res.getString(1),
+							res.getString(2),
+							res.getString(3),
+							Integer.valueOf(res.getString(4)),
+							res.getString(5),
+							Double.valueOf(res.getString(7)));
+							
+				}else if(res.getString(2).contains("Vigilancia")){
+					
+					empresaContratada = new EmpresaVigilancia(res.getString(1),
+							res.getString(2),
+							res.getString(3),
+							Integer.valueOf(res.getString(4)),
+							res.getString(5),
+							Double.valueOf(res.getString(7)));
+				}else if(res.getString(2).contains("Mantenimiento")) {
+					
+					empresaContratada = new EmpresaMantenimiento(res.getString(1),
+							res.getString(2),
+							res.getString(3),
+							Integer.valueOf(res.getString(4)),
+							res.getString(5),
+							Double.valueOf(res.getString(7)));
+				}
+			}
+			return empresaContratada;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return empresaContratada;
 	}
 
 	@Override
@@ -112,22 +163,38 @@ public class EmpresaDAOImpl implements EmpresaDAO, IEncriptador {
 		PreparedStatement ps;
 		ResultSet res;
 		ArrayList<EmpresaContratada> empresas = new ArrayList<EmpresaContratada>();
-		String nombre[];
 		try {
 			ps = conn.prepareStatement(SQL_READALL);
 
 			res = ps.executeQuery();
 
 			while (res.next()) {
-				res.getString(1);
-				res.getString(2);
-				res.getString(3);
-				res.getString(4);
-				res.getString(5);
-				res.getString(6);
-				res.getString(7);
-				//empresas.add(res.getString(1), res.getString(2), res.getString(3), res.getString(4), res.getString(5), res.getString(6), res.getString(7));
-				//Help me, Ayuda
+				if(res.getString(2).contains("Aseo")) {
+				
+					empresas.add(new EmpresaAseo(res.getString(1),
+							res.getString(2),
+							res.getString(3),
+							Integer.valueOf(res.getString(4)),
+							res.getString(5),
+							Double.valueOf(res.getString(7))));
+							
+				}else if(res.getString(2).contains("Vigilancia")){
+					
+					empresas.add(new EmpresaVigilancia(res.getString(1),
+							res.getString(2),
+							res.getString(3),
+							Integer.valueOf(res.getString(4)),
+							res.getString(5),
+							Double.valueOf(res.getString(7))));
+				}else if(res.getString(2).contains("Mantenimiento")) {
+					
+					empresas.add(new EmpresaMantenimiento(res.getString(1),
+							res.getString(2),
+							res.getString(3),
+							Integer.valueOf(res.getString(4)),
+							res.getString(5),
+							Double.valueOf(res.getString(7))));
+				}
 			}
 
 		} catch (SQLException e) {

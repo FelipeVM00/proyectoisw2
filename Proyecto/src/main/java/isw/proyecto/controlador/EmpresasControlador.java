@@ -105,6 +105,11 @@ public class EmpresasControlador implements Initializable {
 	private TableColumn<EmpresaContratada, String> valorContratoCL;
 	ObservableList<EmpresaContratada> contratos = FXCollections.observableArrayList();
 
+	/*
+     * Variable para realizar la conexión a la base de datos.
+     */
+    private EmpresaDAO empresaDAO = DAOFactory.getEmpresaDAO();
+	
 	/**
 	 * inicializa ToggleGroup
 	 */
@@ -151,6 +156,10 @@ public class EmpresasControlador implements Initializable {
 		alerta.showAndWait();
 	}
 
+	 private void llenarTablaContratos() {
+		 contratos.addAll(empresaDAO.leerTodo());
+	 }
+	
 	/**
 	 * Metodo que realiza las acciones tras pulsar el boton "Añadir"
 	 *
@@ -330,8 +339,6 @@ public class EmpresasControlador implements Initializable {
 				String lowerCaseFilter = newValue.toLowerCase();
 				if (contratoo.getNombre().toLowerCase().contains(lowerCaseFilter)) {
 					return true;
-				} else if (contratoo.getNombre().toLowerCase().contains(lowerCaseFilter)) {
-					return true;
 				}
 				return false;
 			});
@@ -340,11 +347,6 @@ public class EmpresasControlador implements Initializable {
 		datosOrdenados.comparatorProperty().bind(tablaContratos.comparatorProperty());
 		tablaContratos.setItems(datosOrdenados);
 	}
-	
-	/*
-     * Variable para realizar la conexión a la base de datos.
-     */
-    private EmpresaDAO empresaDAO = DAOFactory.getEmpresaDAO();
 	
     /*
 	 * Metodo para rellenar la tabla de pagos haciendo la consulta a la base de datos.
@@ -356,15 +358,10 @@ public class EmpresasControlador implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-		/**
-		 * Inicializamos la tabla
-		 */
+	
 		inicializarTablaContratos();
 		inicializarBuscador();
-
-		/**
-		 * Ponemos estos dos botones para que no se puedan seleccionar
-		 */
+		llenarTablaContratos();
 		modificarBT.setDisable(true);
 		eliminarBT.setDisable(true);
 	}

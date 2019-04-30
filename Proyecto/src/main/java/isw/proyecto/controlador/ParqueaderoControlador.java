@@ -16,6 +16,7 @@ import isw.proyecto.modelo.Parqueadero;
 import isw.proyecto.modelo.ParqueaderoDeCarro;
 import isw.proyecto.modelo.ParqueaderoDeMoto;
 import isw.proyecto.modelo.Residente;
+import isw.proyecto.modelo.Visitante;
 import isw.proyecto.modelo.dao.PagoDAO;
 import isw.proyecto.modelo.dao.ParqueaderoDAO;
 import isw.proyecto.modelo.dao.impl.DAOFactory;
@@ -141,6 +142,7 @@ public class ParqueaderoControlador implements Initializable{
 		inicializarColumnas();
 		inicializarBuscadorCarros();
 		inicializarBuscadorMotos();
+		llenarTablas();
 		
 	}
     
@@ -155,7 +157,7 @@ public class ParqueaderoControlador implements Initializable{
     }
 
     
-    private void llenarTablaCarros() {
+    private void llenarTablas() {
 		parqueaderosCarro.addAll(parqueaderoDAO.leerTodo());
     	parqueaderosMoto.addAll(parqueaderoDAO.leerTodo());
 	}
@@ -177,8 +179,6 @@ public class ParqueaderoControlador implements Initializable{
                 String lowerCaseFilter = newValue.toLowerCase();
                 if (parqueaderoo.getOcupante().getNombre().toLowerCase().contains(lowerCaseFilter)) {
                     return true;
-                } else if (parqueaderoo.getOcupante().getApellido().toLowerCase().contains(lowerCaseFilter)) {
-                    return true; 
                 }
                 return false; 
             });
@@ -204,8 +204,6 @@ public class ParqueaderoControlador implements Initializable{
                 }
                 String lowerCaseFilter = newValue.toLowerCase();
                 if (parqueaderoo.getOcupante().getNombre().toLowerCase().contains(lowerCaseFilter)) {
-                    return true;
-                } else if (parqueaderoo.getOcupante().getApellido().toLowerCase().contains(lowerCaseFilter)) {
                     return true; 
                 }
                 return false; 
@@ -295,6 +293,8 @@ public class ParqueaderoControlador implements Initializable{
 			parqueadero.setNumero(Integer.valueOf(numeroParqueoCarro.getText()));
 			parqueadero.setOcupante((Residente) new Residente.ResidenteBuilder().setNombre(nombre[0]).setApellido(nombre[1]).build());
 			parqueadero.setPlaca(placaVehiculoCarro.getText());
+			parqueadero.setNumeroPiso(1);
+			parqueadero.setVisitante((Visitante) new Visitante.VisitanteBuilder().setNombre(" ").setApellido(" ").build());
 			
 			parqueaderoDAO.crear(parqueadero);
 			parqueaderosCarro.add(parqueadero);

@@ -59,7 +59,7 @@ public class ReportesControlador{
      * Lista observable para almacenar los pagos de ser necesario incluirlos en una tabla.
      */
     private ObservableList<Pago> pagosO = FXCollections.observableArrayList();
-    private ObservableList<EmpresaContratada> empresas0 = FXCollections.observableArrayList();
+    private ObservableList<EmpresaContratada> empresasO = FXCollections.observableArrayList();
     private ObservableList<Parqueadero> parqueaderoO = FXCollections.observableArrayList();
 
     /*
@@ -67,9 +67,9 @@ public class ReportesControlador{
      */
     @FXML
     void cllickBtnReporteEmpresas(ActionEvent event) {
-    	empresas0.addAll(reporteDAO.leerEmpresas());
+    	empresasO.addAll(reporteDAO.leerEmpresas());
     	try {
-			ReporteFactory.getTipoArchivo(TipoArchivo.TXT).generarReporte("Reporte_Lista_deA_Empresas", empresas0);
+			ReporteFactory.getTipoArchivo(TipoArchivo.TXT).generarReporte("Reporte_Lista_deA_Empresas", empresasO);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

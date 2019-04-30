@@ -134,5 +134,17 @@ public abstract class EmpresaContratada {
 		return str;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "Empresa{ " + "nombre: " 
+				+ nombre + " Tipo de empresa: " 
+				+ tipoEmpresa + " Numero de contrato: " 
+				+ numeroContrato + " Telefono: " + telefono 
+				+ " Fecha Inicio: " 
+				+ fechaInicio
+				+ " Fecha Terminacion: "
+				+ fechaTerminacion
+				+ " Valor de contrato es: "
+				+ valorContrato;
+	}
 }

@@ -82,4 +82,18 @@ public abstract class Parqueadero {
 		SimpleStringProperty str = new SimpleStringProperty(placa);
 		return str;
 	}
+	
+	@Override
+	public String toString() {
+		return "Parqueadero{ " + "Numero de parqueadero: " 
+				+ numero 
+				+ " Numero Piso: " 
+				+ numeroPiso 
+				+ " Nombre de Residente: " 
+				+ ocupante.getNombre()
+				+ " Nombre de Visitante: " 
+				+ " "
+				+ " Numero de Placa: " 
+				+ placa;
+	}
 }
