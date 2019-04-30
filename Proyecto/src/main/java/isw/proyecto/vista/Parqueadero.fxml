@@ -23,7 +23,7 @@
                      <children>
                         <Pane layoutX="305.0" layoutY="14.0" prefHeight="89.0" prefWidth="609.0" style="-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-color: white;">
                            <children>
-                              <Label layoutX="20.0" layoutY="-1.0" prefHeight="91.0" prefWidth="577.0" style="-fx-font-size: 30; -fx-font-weight: bold; -fx-text-fill: #7387A8;" text="Asignación de parqueaderos de CARROS" />
+                              <Label layoutX="20.0" layoutY="-1.0" prefHeight="91.0" prefWidth="577.0" style="-fx-font-size: 30; -fx-font-weight: bold; -fx-text-fill: #7387A8;" text="Asignación de parqueaderos de Carros" />
                            </children>
                         </Pane>
                         <Pane layoutX="825.0" layoutY="137.0" prefHeight="522.0" prefWidth="379.0" style="-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-color: white;">
@@ -43,7 +43,7 @@
                               <JFXRadioButton fx:id="tipoVisitanteCarro" layoutX="165.0" layoutY="306.0" text="Visitante" toggleGroup="$tipoVisitante" />
                               <Label layoutX="16.0" layoutY="171.0" prefHeight="21.0" prefWidth="78.0" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: gray;" text="Cedula:" />
                               <JFXTextField fx:id="cedulaResidenteCarro" layoutX="108.0" layoutY="173.0" prefHeight="25.0" prefWidth="231.0" />
-                              <JFXButton fx:id="asignarParqueoIndvCarro" buttonType="RAISED" layoutX="134.0" layoutY="383.0" prefHeight="27.0" prefWidth="139.0" ripplerFill="WHITE" style="-fx-background-color: gray;" text="Asignar">
+                              <JFXButton fx:id="asignarParqueoIndvCarro" buttonType="RAISED" layoutX="134.0" layoutY="383.0" onAction="#clickBotonAsignarCar" prefHeight="27.0" prefWidth="139.0" ripplerFill="WHITE" style="-fx-background-color: gray;" text="Asignar">
                                  <font>
                                     <Font size="21.0" />
                                  </font>
@@ -53,7 +53,7 @@
                         <Pane layoutX="435.0" layoutY="340.0" prefHeight="319.0" prefWidth="349.0" style="-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-color: white;">
                            <children>
                               <Label layoutX="14.0" layoutY="-1.0" prefHeight="91.0" prefWidth="210.0" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #7387A8;" text="Asignación aleatoria" />
-                              <JFXButton fx:id="sorteoAleatorioCarro" buttonType="RAISED" layoutX="84.0" layoutY="160.0" prefHeight="45.0" prefWidth="181.0" ripplerFill="WHITE" style="-fx-background-color: gray;" text="Realizar sorteo">
+                              <JFXButton fx:id="sorteoAleatorioCarro" buttonType="RAISED" layoutX="84.0" layoutY="160.0" onAction="#clickBotonSorteoCar" prefHeight="45.0" prefWidth="181.0" ripplerFill="WHITE" style="-fx-background-color: gray;" text="Realizar sorteo">
                                  <font>
                                     <Font size="21.0" />
                                  </font>
@@ -100,7 +100,7 @@
                               <JFXRadioButton fx:id="tipoVisitanteMoto" layoutX="166.0" layoutY="302.0" text="Visitante" toggleGroup="$tipoVisitante" />
                               <Label layoutX="17.0" layoutY="167.0" prefHeight="21.0" prefWidth="78.0" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: gray;" text="Cedula:" />
                               <JFXTextField fx:id="cedulaResidenteMoto" layoutX="109.0" layoutY="169.0" prefHeight="25.0" prefWidth="231.0" />
-                              <JFXButton fx:id="asignarParqueoIndvMoto" buttonType="RAISED" layoutX="134.0" layoutY="383.0" prefHeight="27.0" prefWidth="139.0" ripplerFill="WHITE" style="-fx-background-color: gray;" text="Asignar">
+                              <JFXButton fx:id="asignarParqueoIndvMoto" buttonType="RAISED" layoutX="134.0" layoutY="383.0" onAction="#clickBotonAsignarMot" prefHeight="27.0" prefWidth="139.0" ripplerFill="WHITE" style="-fx-background-color: gray;" text="Asignar">
                                  <font>
                                     <Font size="21.0" />
                                  </font>
@@ -110,7 +110,7 @@
                         <Pane layoutX="435.0" layoutY="343.0" prefHeight="319.0" prefWidth="349.0" style="-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-color: white;">
                            <children>
                               <Label layoutX="14.0" layoutY="-1.0" prefHeight="91.0" prefWidth="210.0" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #7387A8;" text="Asignación aleatoria" />
-                              <JFXButton fx:id="sorteoAleatorioMoto" buttonType="RAISED" layoutX="92.0" layoutY="160.0" prefHeight="45.0" prefWidth="181.0" ripplerFill="#f8f8f8" style="-fx-background-color: gray;" text="Realizar sorteo">
+                              <JFXButton fx:id="sorteoAleatorioMoto" buttonType="RAISED" layoutX="92.0" layoutY="160.0" onAction="#clickBotonSorteoMot" prefHeight="45.0" prefWidth="181.0" ripplerFill="#f8f8f8" style="-fx-background-color: gray;" text="Realizar sorteo">
                                  <font>
                                     <Font size="21.0" />
                                  </font>
