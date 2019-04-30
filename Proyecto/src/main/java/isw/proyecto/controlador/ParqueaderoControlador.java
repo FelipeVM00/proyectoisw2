@@ -144,8 +144,7 @@ public class ParqueaderoControlador implements Initializable{
     	columnaResidenteAsignMot.setCellValueFactory(cell -> cell.getValue().ocupanteProperty());
     	columnaPlacaCar.setCellValueFactory(cell -> cell.getValue().placaProperty());
     	columnaPlacaMot.setCellValueFactory(cell -> cell.getValue().placaProperty());
-    	
-    
+  
     }
 
     
@@ -258,7 +257,7 @@ public class ParqueaderoControlador implements Initializable{
     		return false;
     	}
     	else if(!ExpresionesUtil.tieneSoloNumeros(cedulaResidenteCarro.getText())) {
-    		mostrarAlerta("Error de ingreso", "En el campo de valor solo pueden ir numeros", Alert.AlertType.ERROR);
+    		mostrarAlerta("Error de ingreso", "En el campo de cedula solo pueden ir numeros", Alert.AlertType.ERROR);
     		return false;
     	}
     	return true;
@@ -272,7 +271,7 @@ public class ParqueaderoControlador implements Initializable{
     		return false;
     	}
     	else if(!ExpresionesUtil.tieneSoloNumeros(cedulaResidenteMoto.getText())) {
-    		mostrarAlerta("Error de ingreso", "En el campo de valor solo pueden ir numeros", Alert.AlertType.ERROR);
+    		mostrarAlerta("Error de ingreso", "En el campo de cedula solo pueden ir numeros", Alert.AlertType.ERROR);
     		return false;
     	}
     	return true;
