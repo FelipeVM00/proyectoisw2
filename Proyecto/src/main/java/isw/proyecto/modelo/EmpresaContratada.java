@@ -9,14 +9,14 @@ import javafx.beans.property.SimpleStringProperty;
 
 public abstract class EmpresaContratada {
 
-	public String nombre;
-	public String tipoEmpresa;
-	public String numeroContrato;
-	public int telefono;
-	public LocalDate fechaInicio;
-	public LocalDate fechaTerminacion;
-	public double valorContrato;
-	public List<Empleado> empleados;
+	private String nombre;
+	private String tipoEmpresa;
+	private String numeroContrato;
+	private int telefono;
+	private LocalDate fechaInicio;
+	private LocalDate fechaTerminacion;
+	private double valorContrato;
+	private List<Empleado> empleados;
 
 	public EmpresaContratada() {
 	}
@@ -114,8 +114,8 @@ public abstract class EmpresaContratada {
 		return str;
 	}
 	
-	public SimpleIntegerProperty telefonoProperty() {
-		SimpleIntegerProperty str = new SimpleIntegerProperty(telefono);
+	public SimpleStringProperty telefonoProperty() {
+		SimpleStringProperty str = new SimpleStringProperty(Integer.toString(telefono));
 		return str;
 	}
 	
@@ -129,8 +129,8 @@ public abstract class EmpresaContratada {
 		return str;
 	}
 	
-	public SimpleDoubleProperty valorContratoProperty() {
-		SimpleDoubleProperty str = new SimpleDoubleProperty(valorContrato);
+	public SimpleStringProperty valorContratoProperty() {
+		SimpleStringProperty str = new SimpleStringProperty(Double.toString(valorContrato));
 		return str;
 	}
 	

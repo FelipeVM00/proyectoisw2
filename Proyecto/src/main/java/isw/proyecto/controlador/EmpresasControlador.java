@@ -2,12 +2,14 @@ package isw.proyecto.controlador;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.event.ActionEvent;
 
 import java.net.URL;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -16,6 +18,8 @@ import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXDatePicker;
 
 import isw.proyecto.modelo.*;
+import isw.proyecto.modelo.decorator.impl.pago.Pago;
+import isw.proyecto.util.ExpresionesUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -76,8 +80,10 @@ public class EmpresasControlador implements Initializable {
 	private JFXRadioButton tipoEmpresaVigilanciaRB;
 
 	/**
-	 * declarando tablas y columnas
+	 * Lista de nombres de empresas para autocompletar en la busqueda.
 	 */
+	private List<String> nombresEmpresas = new ArrayList<String>();
+
 	@FXML
 	private TableView<EmpresaContratada> tablaContratos;
 	@FXML
@@ -94,9 +100,16 @@ public class EmpresasControlador implements Initializable {
 	private TableColumn<EmpresaContratada, String> fechaTerminacionContratoCL;
 	@FXML
 	private TableColumn<EmpresaContratada, String> valorContratoCL;
-	ObservableList<EmpresaContratada> contratos = FXCollections.observableArrayList();;
+	ObservableList<EmpresaContratada> contratos = FXCollections.observableArrayList();
+
+	/**
+	 * inicializa ToggleGroup
+	 */
+	@FXML
+	private ToggleGroup tipoEmpresa;
 
 	private int posicionEmpresaEnTabla;
+	private EmpresaContratada empresa;
 
 	/**
 	 * Metodo que realiza las acciones tras pulsar el boton "Nuevo"
@@ -116,8 +129,17 @@ public class EmpresasControlador implements Initializable {
 		aniadirBT.setDisable(false);
 	}
 
-	public static void mostrarAlerta(String titulo, String msg) {
-		Alert alerta = new Alert(Alert.AlertType.WARNING);
+	/*
+	 * Metodo de utilidad para mostrar una alerta en pantalla.
+	 * 
+	 * @param titulo titulo de la alerta.
+	 * 
+	 * @param msg mensaje de la alerta.
+	 * 
+	 * @param tipo tipo de alerta.
+	 */
+	public static void mostrarAlerta(String titulo, String msg, Alert.AlertType tipo) {
+		Alert alerta = new Alert(tipo);
 		alerta.initStyle(StageStyle.UTILITY);
 		alerta.setTitle("Alerta");
 		alerta.setHeaderText(titulo);
@@ -131,25 +153,48 @@ public class EmpresasControlador implements Initializable {
 	 * @param event
 	 */
 	@FXML
-	private void aniadir(ActionEvent event) {
-		if (nombreTF.getText().isEmpty() || numeroContratoTF.getText().isEmpty() || telefonoTF.getText().isEmpty()
-				|| valorContratoTF.getText().isEmpty()) {
-			mostrarAlerta("Informacion Incompleta", "Por favor termine de rellenar todos los campos");
-		} else {
-			EmpresaContratada empresas = new EmpresaAseo();
-			empresas.setNombre(nombreTF.getText());
-			empresas.setTipoEmpresa(tipoEmpresaAseoRB.getText());
-			empresas.setNumeroContrato(numeroContratoTF.getText());
-			empresas.setTelefono(Integer.parseInt(telefonoTF.getText()));
-			empresas.setFechaInicio(
-					fechaInicioDP.getValue().format(DateTimeFormatter.ofPattern("d/MM/yyyy")).toString());
-			empresas.setFechaTerminacion(
-					fechaTerminacionDP.getValue().format(DateTimeFormatter.ofPattern("d/MM/yyyy")).toString());
-			empresas.setValorContrato(Double.parseDouble(valorContratoTF.getText()));
-
-			contratos.add(empresas);
+	void aniadir(ActionEvent event) {
+		RadioButton seleccionado = (RadioButton) tipoEmpresa.getSelectedToggle();
+		if (validarInfo()) {
+			String[] nombre = nombreTF.getText().split(" ");
+			if (seleccionado.getText().contains("Aseo")) {
+				empresa = new EmpresaAseo();
+				empresa.setNombre(nombreTF.getText());
+				empresa.setNumeroContrato(numeroContratoTF.getText());
+				empresa.setTelefono(Integer.valueOf(telefonoTF.getText()));
+				empresa.setTipoEmpresa(seleccionado.getText());
+				empresa.setFechaInicio(
+						fechaInicioDP.getValue().format(DateTimeFormatter.ofPattern("d/MM/yyyy")).toString());
+				empresa.setFechaTerminacion(
+						fechaTerminacionDP.getValue().format(DateTimeFormatter.ofPattern("d/MM/yyyy")).toString());
+				empresa.setValorContrato(Double.valueOf(valorContratoTF.getText()));
+				contratos.add(empresa);
+			} else if (seleccionado.getText().contains("Mantenimiento")) {
+				empresa = new EmpresaMantenimiento();
+				empresa.setNombre(nombreTF.getText());
+				empresa.setNumeroContrato(numeroContratoTF.getText());
+				empresa.setTelefono(Integer.valueOf(telefonoTF.getText()));
+				empresa.setTipoEmpresa(seleccionado.getText());
+				empresa.setFechaInicio(
+						fechaInicioDP.getValue().format(DateTimeFormatter.ofPattern("d/MM/yyyy")).toString());
+				empresa.setFechaTerminacion(
+						fechaTerminacionDP.getValue().format(DateTimeFormatter.ofPattern("d/MM/yyyy")).toString());
+				empresa.setValorContrato(Double.valueOf(valorContratoTF.getText()));
+				contratos.add(empresa);
+			} else if (seleccionado.getText().contains("Vigilancia")) {
+				empresa = new EmpresaVigilancia();
+				empresa.setNombre(nombreTF.getText());
+				empresa.setNumeroContrato(numeroContratoTF.getText());
+				empresa.setTelefono(Integer.valueOf(telefonoTF.getText()));
+				empresa.setTipoEmpresa(seleccionado.getText());
+				empresa.setFechaInicio(
+						fechaInicioDP.getValue().format(DateTimeFormatter.ofPattern("d/MM/yyyy")).toString());
+				empresa.setFechaTerminacion(
+						fechaTerminacionDP.getValue().format(DateTimeFormatter.ofPattern("d/MM/yyyy")).toString());
+				empresa.setValorContrato(Double.valueOf(valorContratoTF.getText()));
+				contratos.add(empresa);
+			}
 		}
-
 	}
 
 	/**
@@ -159,16 +204,7 @@ public class EmpresasControlador implements Initializable {
 	 */
 	@FXML
 	private void modificar(ActionEvent event) {
-		EmpresaContratada empresas = new EmpresaAseo();
-		empresas.setNombre(nombreTF.getText());
-		empresas.setTipoEmpresa(tipoEmpresaAseoRB.getText());
-		empresas.setNumeroContrato(numeroContratoTF.getText());
-		empresas.setTelefono(Integer.parseInt(telefonoTF.getText()));
-		empresas.setFechaInicio(fechaInicioDP.getValue().format(DateTimeFormatter.ofPattern("d/MM/yyyy")).toString());
-		empresas.setFechaTerminacion(
-				fechaTerminacionDP.getValue().format(DateTimeFormatter.ofPattern("d/MM/yyyy")).toString());
-		empresas.setValorContrato(Double.parseDouble(valorContratoTF.getText()));
-		contratos.set(posicionEmpresaEnTabla, empresas);
+
 	}
 
 	/**
@@ -236,59 +272,48 @@ public class EmpresasControlador implements Initializable {
 	}
 
 	/**
-	 * Metodo para inicializar la tabla
+	 * Metodo para validar que la informacion ingresada en los campos sea correcta
+	 * 
+	 * @return Si es valida o no
 	 */
-
-	private void inicializarTablaContratos() {
-		nombreCL.setCellValueFactory(cell -> cell.getValue().nombreProperty());
-		tipoEmpresaCL.setCellValueFactory(new PropertyValueFactory<EmpresaContratada, String>("tipo de empresa"));
-		numeroContratoCL.setCellValueFactory(new PropertyValueFactory<EmpresaContratada, String>("numero de contrato"));
-		telefonoCL.setCellValueFactory(new PropertyValueFactory<EmpresaContratada, String>("telefono"));
-		fechaInicioContratoCL.setCellValueFactory(
-				new PropertyValueFactory<EmpresaContratada, String>("fecha de inicio de contrato"));
-		fechaTerminacionContratoCL.setCellValueFactory(
-				new PropertyValueFactory<EmpresaContratada, String>("fecha de termino de contrato"));
-		valorContratoCL.setCellValueFactory(new PropertyValueFactory<EmpresaContratada, String>("valor contrato"));
-
-		contratos = FXCollections.observableArrayList();
-		tablaContratos.setItems(contratos);
+	private boolean validarInfo() {
+		String nombre = nombreTF.getText().replaceAll("\\s*$", "");
+		if (!ExpresionesUtil.tieneSoloLetras(nombre)) {
+			System.out.println(nombre.replaceAll("\\s+", ""));
+			mostrarAlerta("Error de ingreso", "En el campo de Nombre solo pueden ir letras", Alert.AlertType.ERROR);
+			return false;
+		} else if (!ExpresionesUtil.tieneSoloNumeros(telefonoTF.getText())) {
+			mostrarAlerta("Error de ingreso", "En el campo de Telefono solo pueden ir numeros", Alert.AlertType.ERROR);
+			return false;
+		} else if (!ExpresionesUtil.tieneSoloNumeros(numeroContratoTF.getText())) {
+			mostrarAlerta("Error de ingreso", "En el campo de numero de contrato solo pueden ir numeros",
+					Alert.AlertType.ERROR);
+			return false;
+		} else if (!ExpresionesUtil.tieneSoloNumeros(valorContratoTF.getText())) {
+			mostrarAlerta("Error de ingreso", "En el campo de valor de contrato solo pueden ir numeros",
+					Alert.AlertType.ERROR);
+			return false;
+		}
+		return true;
 	}
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
+	/**
+	 * Metodo para inicializar la tabla
+	 */
+	private void inicializarTablaContratos() {
+		nombreCL.setCellValueFactory(cell -> cell.getValue().nombreProperty());
+		tipoEmpresaCL.setCellValueFactory(cell -> cell.getValue().tipoEmpresaProperty());
+		numeroContratoCL.setCellValueFactory(cell -> cell.getValue().numeroContratoProperty());
+		telefonoCL.setCellValueFactory(cell -> cell.getValue().telefonoProperty());
+		fechaInicioContratoCL.setCellValueFactory(cell -> cell.getValue().fechaInicioProperty());
+		fechaTerminacionContratoCL.setCellValueFactory(cell -> cell.getValue().fechaTerminacionProperty());
+		valorContratoCL.setCellValueFactory(cell -> cell.getValue().valorContratoProperty());
+	}
 
-		/**
-		 * Inicializamos la tabla
-		 */
-		this.inicializarTablaContratos();
-
-		/**
-		 * Ponemos estos dos botones para que no se puedan seleccionar
-		 */
-		modificarBT.setDisable(true);
-		eliminarBT.setDisable(true);
-
-		/**
-		 * Seleccionar las tuplas de la tabla de las empresas
-		 */
-		final ObservableList<EmpresaContratada> tablaContratosSel = tablaContratos.getSelectionModel()
-				.getSelectedItems();
-		tablaContratosSel.addListener(selectorTablaEmpresas);
-
-		/**
-		 * Inicializamos la tabla con algunos datos aleatorios
-		 */
-/*		for (int i = 0; i < 5; i++) {
-			EmpresaContratada c1 = new EmpresaAseo();
-			c1.setNombre("Nombre empresa " + i);
-			c1.setTipoEmpresa("tipoEmpresaAseoRB");
-			c1.setNumeroContrato("abcd" + i);
-			c1.setTelefono(12345 + i);
-			c1.setFechaInicio(fechaInicioDP.getValue().format(DateTimeFormatter.ofPattern("d/MM/yyyy")).toString());
-			c1.setFechaTerminacion(fechaInicioDP.getValue().format(DateTimeFormatter.ofPattern("d/MM/yyyy")).toString());
-			c1.setValorContrato(2000000);
-			contratos.add(c1);
-		}*/
+	private void inicializarBuscador() {
+		for (EmpresaContratada p : tablaContratos.getItems()) {
+			nombresEmpresas.add(nombreCL.getCellObservableValue(p).getValue());
+		}
 		FilteredList<EmpresaContratada> datosFiltrados = new FilteredList<>(contratos, p -> true);
 		campoBusqueda.textProperty().addListener((observable, oldValue, newValue) -> {
 			datosFiltrados.setPredicate(contratoo -> {
@@ -307,11 +332,22 @@ public class EmpresasControlador implements Initializable {
 		SortedList<EmpresaContratada> datosOrdenados = new SortedList<>(datosFiltrados);
 		datosOrdenados.comparatorProperty().bind(tablaContratos.comparatorProperty());
 		tablaContratos.setItems(datosOrdenados);
-		nombreCL.setCellValueFactory(cell -> cell.getValue().nombreProperty());
-		tipoEmpresaCL.setCellValueFactory(cell -> cell.getValue().tipoEmpresaProperty());
-		numeroContratoCL.setCellValueFactory(cell -> cell.getValue().numeroContratoProperty());
-		fechaInicioContratoCL.setCellValueFactory(cell -> cell.getValue().fechaInicioProperty());
-		fechaTerminacionContratoCL.setCellValueFactory(cell -> cell.getValue().fechaTerminacionProperty());
+	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+
+		/**
+		 * Inicializamos la tabla
+		 */
+		inicializarTablaContratos();
+		inicializarBuscador();
+
+		/**
+		 * Ponemos estos dos botones para que no se puedan seleccionar
+		 */
+		modificarBT.setDisable(true);
+		eliminarBT.setDisable(true);
 	}
 
 }
