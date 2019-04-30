@@ -16,6 +16,9 @@ import isw.proyecto.modelo.Parqueadero;
 import isw.proyecto.modelo.ParqueaderoDeCarro;
 import isw.proyecto.modelo.ParqueaderoDeMoto;
 import isw.proyecto.modelo.Residente;
+import isw.proyecto.modelo.dao.PagoDAO;
+import isw.proyecto.modelo.dao.ParqueaderoDAO;
+import isw.proyecto.modelo.dao.impl.DAOFactory;
 import isw.proyecto.util.ExpresionesUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -118,6 +121,10 @@ public class ParqueaderoControlador implements Initializable{
     @FXML
     private ToggleGroup tipoVisitante;
     
+    /*
+     * Variable para realizar la conexión a la base de datos.
+     */
+    private ParqueaderoDAO parqueaderoDAO = DAOFactory.getParqueaderoDAO();
     
     /*
      * Lista de nombres de residentes para autocompletar en la busqueda.
@@ -149,8 +156,8 @@ public class ParqueaderoControlador implements Initializable{
 
     
     private void llenarTablaCarros() {
-		//parqueadero.addAll(parqueaderosCarro);
-    	
+		parqueaderosCarro.addAll(parqueaderoDAO.leerTodo());
+    	parqueaderosMoto.addAll(parqueaderoDAO.leerTodo());
 	}
     
     /*
@@ -289,6 +296,7 @@ public class ParqueaderoControlador implements Initializable{
 			parqueadero.setOcupante((Residente) new Residente.ResidenteBuilder().setNombre(nombre[0]).setApellido(nombre[1]).build());
 			parqueadero.setPlaca(placaVehiculoCarro.getText());
 			
+			parqueaderoDAO.crear(parqueadero);
 			parqueaderosCarro.add(parqueadero);
 			
 			
@@ -305,6 +313,7 @@ public class ParqueaderoControlador implements Initializable{
     		parqueadero.setOcupante((Residente) new Residente.ResidenteBuilder().setNombre(nombre[0]).setApellido(nombre[1]).build());
     		parqueadero.setPlaca(placaVehiculoMoto.getText());
     		
+    		parqueaderoDAO.crear(parqueadero);
     		parqueaderosMoto.add(parqueadero);
     		
     }
