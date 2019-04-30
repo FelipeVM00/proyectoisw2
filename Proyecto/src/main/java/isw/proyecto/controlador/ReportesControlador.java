@@ -3,6 +3,7 @@ package isw.proyecto.controlador;
 import java.io.IOException;
 import com.jfoenix.controls.JFXButton;
 
+import isw.proyecto.modelo.Parqueadero;
 import isw.proyecto.modelo.dao.ReporteDAO;
 import isw.proyecto.modelo.dao.impl.DAOFactory;
 import isw.proyecto.modelo.decorator.impl.pago.Pago;
@@ -57,6 +58,9 @@ public class ReportesControlador{
      * Lista observable para almacenar los pagos de ser necesario incluirlos en una tabla.
      */
     private ObservableList<Pago> pagosO = FXCollections.observableArrayList();
+    
+    
+    private ObservableList<Parqueadero> parqueaderoO = FXCollections.observableArrayList();
 
     /*
      * Metodo que escucha cuando se hace click en el boton de empresas.
@@ -86,6 +90,12 @@ public class ReportesControlador{
     @FXML
     void cllickBtnReporteParqueaderos(ActionEvent event) {
 
+    	parqueaderoO.addAll(reporteDAO.leerParqueaderos());
+    	try {
+			ReporteFactory.getTipoArchivo(TipoArchivo.TXT).generarReporte("Reporte_Parqueaderos", parqueaderoO);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 
     /*
