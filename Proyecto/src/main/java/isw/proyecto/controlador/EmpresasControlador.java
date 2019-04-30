@@ -18,6 +18,9 @@ import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXDatePicker;
 
 import isw.proyecto.modelo.*;
+import isw.proyecto.modelo.dao.EmpresaDAO;
+import isw.proyecto.modelo.dao.PagoDAO;
+import isw.proyecto.modelo.dao.impl.DAOFactory;
 import isw.proyecto.modelo.decorator.impl.pago.Pago;
 import isw.proyecto.util.ExpresionesUtil;
 import javafx.collections.FXCollections;
@@ -110,7 +113,8 @@ public class EmpresasControlador implements Initializable {
 
 	private int posicionEmpresaEnTabla;
 	private EmpresaContratada empresa;
-
+	
+	
 	/**
 	 * Metodo que realiza las acciones tras pulsar el boton "Nuevo"
 	 *
@@ -129,7 +133,7 @@ public class EmpresasControlador implements Initializable {
 		aniadirBT.setDisable(false);
 	}
 
-	/*
+	/**
 	 * Metodo de utilidad para mostrar una alerta en pantalla.
 	 * 
 	 * @param titulo titulo de la alerta.
@@ -168,6 +172,7 @@ public class EmpresasControlador implements Initializable {
 				empresa.setFechaTerminacion(
 						fechaTerminacionDP.getValue().format(DateTimeFormatter.ofPattern("d/MM/yyyy")).toString());
 				empresa.setValorContrato(Double.valueOf(valorContratoTF.getText()));
+				empresaDAO.crear(empresa);
 				contratos.add(empresa);
 			} else if (seleccionado.getText().contains("Mantenimiento")) {
 				empresa = new EmpresaMantenimiento();
@@ -180,6 +185,7 @@ public class EmpresasControlador implements Initializable {
 				empresa.setFechaTerminacion(
 						fechaTerminacionDP.getValue().format(DateTimeFormatter.ofPattern("d/MM/yyyy")).toString());
 				empresa.setValorContrato(Double.valueOf(valorContratoTF.getText()));
+				empresaDAO.crear(empresa);
 				contratos.add(empresa);
 			} else if (seleccionado.getText().contains("Vigilancia")) {
 				empresa = new EmpresaVigilancia();
@@ -192,6 +198,7 @@ public class EmpresasControlador implements Initializable {
 				empresa.setFechaTerminacion(
 						fechaTerminacionDP.getValue().format(DateTimeFormatter.ofPattern("d/MM/yyyy")).toString());
 				empresa.setValorContrato(Double.valueOf(valorContratoTF.getText()));
+				empresaDAO.crear(empresa);
 				contratos.add(empresa);
 			}
 		}
@@ -332,6 +339,18 @@ public class EmpresasControlador implements Initializable {
 		SortedList<EmpresaContratada> datosOrdenados = new SortedList<>(datosFiltrados);
 		datosOrdenados.comparatorProperty().bind(tablaContratos.comparatorProperty());
 		tablaContratos.setItems(datosOrdenados);
+	}
+	
+	/*
+     * Variable para realizar la conexión a la base de datos.
+     */
+    private EmpresaDAO empresaDAO = DAOFactory.getEmpresaDAO();
+	
+    /*
+	 * Metodo para rellenar la tabla de pagos haciendo la consulta a la base de datos.
+	 */
+	private void llenarTablaPagos() {
+		contratos.addAll(empresaDAO.leerTodo());
 	}
 
 	@Override

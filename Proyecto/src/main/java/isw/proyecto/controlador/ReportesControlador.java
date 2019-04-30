@@ -3,6 +3,7 @@ package isw.proyecto.controlador;
 import java.io.IOException;
 import com.jfoenix.controls.JFXButton;
 
+import isw.proyecto.modelo.EmpresaContratada;
 import isw.proyecto.modelo.Parqueadero;
 import isw.proyecto.modelo.dao.ReporteDAO;
 import isw.proyecto.modelo.dao.impl.DAOFactory;
@@ -58,8 +59,7 @@ public class ReportesControlador{
      * Lista observable para almacenar los pagos de ser necesario incluirlos en una tabla.
      */
     private ObservableList<Pago> pagosO = FXCollections.observableArrayList();
-    
-    
+    private ObservableList<EmpresaContratada> empresas0 = FXCollections.observableArrayList();
     private ObservableList<Parqueadero> parqueaderoO = FXCollections.observableArrayList();
 
     /*
@@ -67,7 +67,12 @@ public class ReportesControlador{
      */
     @FXML
     void cllickBtnReporteEmpresas(ActionEvent event) {
-
+    	empresas0.addAll(reporteDAO.leerEmpresas());
+    	try {
+			ReporteFactory.getTipoArchivo(TipoArchivo.TXT).generarReporte("Reporte_Lista_deA_Empresas", empresas0);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 
     /*
