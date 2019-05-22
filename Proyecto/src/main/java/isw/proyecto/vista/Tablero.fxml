@@ -14,7 +14,7 @@
    <children>
       <JFXToolbar layoutX="184.0" layoutY="14.0" prefHeight="40.0" prefWidth="1360.0" style="-fx-min-height: 42; -fx-background-color: #222D32;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
-            <Label prefHeight="30.0" prefWidth="1208.0" style="-fx-font-size: 20; -fx-text-fill: #7387A8; -fx-font-weight: bold;" text="ISW 2 Inc." BorderPane.alignment="CENTER">
+            <Label prefHeight="30.0" prefWidth="1208.0" style="-fx-font-size: 20; -fx-text-fill: #7387A8; -fx-font-weight: bold;" text="BIG BUILDER Inc." BorderPane.alignment="CENTER">
                <padding>
                   <Insets left="40.0" />
                </padding>

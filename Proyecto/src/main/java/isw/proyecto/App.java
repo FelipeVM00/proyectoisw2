@@ -21,6 +21,5 @@ public class App extends Application
         stage.setResizable(false);
         stage.sizeToScene();
         stage.show();
-        System.out.println("Hola mundo");
 	}
 }
