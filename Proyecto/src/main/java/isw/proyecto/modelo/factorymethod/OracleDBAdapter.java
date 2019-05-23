@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.util.Properties;
 
 import isw.proyecto.util.PropertiesUtil;
-import oracle.jdbc.driver.OracleDriver;
+//import oracle.jdbc.driver.OracleDriver;
 
 public class OracleDBAdapter implements IDBAdapter{
 	
@@ -20,7 +20,7 @@ public class OracleDBAdapter implements IDBAdapter{
     static {
         //Bloque para registrar el Driver de Oracle
         try {
-            new OracleDriver();
+//            new OracleDriver();
         } catch (Exception e) {
             e.printStackTrace();
         }
