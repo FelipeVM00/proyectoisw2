@@ -48,6 +48,11 @@
                                     <Font size="21.0" />
                                  </font>
                               </JFXButton>
+                              <JFXButton fx:id="nuevoParqueoIndvCarro1" buttonType="RAISED" layoutX="134.0" layoutY="445.0" onAction="#clickBotonNuevoCar" prefHeight="27.0" prefWidth="139.0" ripplerFill="WHITE" style="-fx-background-color: gray;" text="Nuevo">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </JFXButton>
                            </children>
                         </Pane>
                         <Pane layoutX="435.0" layoutY="340.0" prefHeight="319.0" prefWidth="349.0" style="-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,1.5); -fx-background-color: white;">
@@ -101,6 +106,11 @@
                               <Label layoutX="17.0" layoutY="167.0" prefHeight="21.0" prefWidth="78.0" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: gray;" text="Cedula:" />
                               <JFXTextField fx:id="cedulaResidenteMoto" layoutX="109.0" layoutY="169.0" prefHeight="25.0" prefWidth="231.0" />
                               <JFXButton fx:id="asignarParqueoIndvMoto" buttonType="RAISED" layoutX="134.0" layoutY="383.0" onAction="#clickBotonAsignarMot" prefHeight="27.0" prefWidth="139.0" ripplerFill="WHITE" style="-fx-background-color: gray;" text="Asignar">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXButton fx:id="nuevoParqueoIndvMoto1" buttonType="RAISED" layoutX="135.0" layoutY="441.0" onAction="#clickBotonNuevoMot" prefHeight="27.0" prefWidth="139.0" ripplerFill="WHITE" style="-fx-background-color: gray;" text="Nuevo">
                                  <font>
                                     <Font size="21.0" />
                                  </font>

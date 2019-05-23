@@ -43,9 +43,13 @@ public class ParqueaderoControlador implements Initializable{
 	@FXML
     private JFXButton sorteoAleatorioCarro;
 	@FXML
+    private JFXButton nuevoParqueoIndvCarro1;
+	@FXML
     private JFXButton asignarParqueoIndvMoto;
     @FXML
     private JFXButton sorteoAleatorioMoto;
+    @FXML
+    private JFXButton nuevoParqueoIndvMoto1;
 	
     
     /**
@@ -136,6 +140,26 @@ public class ParqueaderoControlador implements Initializable{
     private ObservableList<Parqueadero> parqueaderosMoto = FXCollections.observableArrayList();
 
     private Parqueadero parqueadero;
+    
+    @FXML
+    private void clickBotonNuevoCar(ActionEvent event) {
+    	
+    	numeroParqueoCarro.setText("");
+    	nombreResidenteCarro.setText("");
+    	cedulaResidenteCarro.setText("");
+    	placaVehiculoCarro.setText("");
+    	
+    }
+    
+    @FXML
+    private void clickBotonNuevoMot(ActionEvent event) {
+    	
+    	numeroParqueoMoto.setText("");
+    	nombreResidenteMoto.setText("");
+    	cedulaResidenteMoto.setText("");
+    	placaVehiculoMoto.setText("");
+    }
+    
     
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -317,6 +341,8 @@ public class ParqueaderoControlador implements Initializable{
     		parqueaderosMoto.add(parqueadero);
     		
     }
+    
+    
 
     @FXML
     void clickBotonSorteoCar(ActionEvent event) {
